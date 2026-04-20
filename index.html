@@ -1,215 +1,453 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satwik Pandey</title>
+<link rel="shortcut icon" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-    <title>Satwik Pandey</title>
+  :root {
+    --bg: #f8f4ea;
+    --surface: #efe7d8;
+    --text: #2f3a2d;
+    --text-muted: #596754;
+    --text-dim: #8c8d74;
+    --purple: #3f8f56;
+    --purple-dim: #2c6f42;
+    --purple-faint: rgba(63, 143, 86, 0.08);
+    --accent-border: rgba(63, 143, 86, 0.45);
+    --accent-hover: #61ad76;
+    --border: rgba(63, 143, 86, 0.2);
+    --heading: #1e2f23;
+    --hero-blend: multiply;
+    --hero-saturation: 0.95;
+    --hero-brightness: 1;
+    --hero-contrast: 1;
+    --hero-opacity: 0.78;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'EB Garamond', Georgia, serif;
+  }
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+  html {
+    font-size: 18px;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
 
-    <link rel="stylesheet" type="text/css" href="default.css">
+  body {
+    font-family: var(--font-body);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
 
-    <link id="theme-style" rel="stylesheet" type="text/css" href="">
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 1;
+  }
 
+  /* ─── HEADER ─────────────────────────────── */
+  header {
+    position: relative;
+    padding-top: 72px;
+    padding-bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    min-height: 320px;
+  }
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
-    
-    <link rel="icon" type="image/x-icon" href="images/Self1.ico">
+  .header-left {
+    padding-top: 8px;
+  }
 
+  .site-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 6vw, 5.2rem);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--heading);
+    margin-bottom: 28px;
+  }
 
+  .header-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
 
-  </head>
-  <body>
+  .header-links a {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
 
-      <section class="s1">
-        <div class="main-container">
+  .header-links a:hover {
+    color: var(--purple);
+  }
 
-          <div class="greeting-wrapper">
-            <h1>Hi, I'm Satwik Pandey</h1>
+  .header-links .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-dim);
+  }
+
+  /* Triangles image — top right */
+  .hero-image {
+    position: absolute;
+    right: -324px;
+    top: -80px;
+    width: 940px;
+    opacity: var(--hero-opacity);
+    pointer-events: none;
+    mix-blend-mode: var(--hero-blend);
+    filter: saturate(var(--hero-saturation)) brightness(var(--hero-brightness)) contrast(var(--hero-contrast));
+  }
+
+  /* ─── MAIN CONTENT ───────────────────────── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 80px;
+    padding-top: 64px;
+    padding-bottom: 96px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+
+  /* ─── SECTION LABEL ──────────────────────── */
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+  }
+
+  /* ─── ABOUT ──────────────────────────────── */
+  .about-col p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .about-col p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ─── PUBLICATIONS ───────────────────────── */
+  .pubs-col {
+    padding-top: 0;
+  }
+
+  .pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .pub-item {
+    position: relative;
+  }
+
+  .pub-meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin-bottom: 7px;
+    font-family: var(--font-body);
+  }
+
+  .pub-venue {
+    color: var(--purple-dim);
+    font-style: italic;
+    margin-left: 8px;
+  }
+
+  .pub-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--heading);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+  }
+
+  .pub-title:hover {
+    color: var(--purple);
+  }
+
+  .pub-authors {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .pub-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .pub-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .pub-link {
+    font-size: 0.73rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--purple);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-border);
+    padding-bottom: 1px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .pub-link:hover {
+    color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .pub-divider {
+    height: 1px;
+    background: var(--border);
+    margin-top: 36px;
+  }
+
+  /* Removed: .all-posts link — replaced with separate section */
+
+  /* ─── WRITING / NOTES SECTION ────────────── */
+  .writings-section {
+    padding-top: 0;
+    grid-column: 2;
+    margin-top: 56px;
+  }
+
+  /* ─── FOOTER ─────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer p {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    font-family: var(--font-body);
+  }
+
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover {
+    color: var(--purple);
+  }
+
+  /* ─── PURPLE ACCENT GLOW ─────────────────── */
+  /* .glow-orb {
+    position: fixed;
+    top: -120px;
+    right: -80px;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108, 60, 180, 0.09) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  } */
+
+  /* ─── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 24px;
+    }
+
+    header {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding-top: 48px;
+    }
+
+    .header-links {
+      flex-wrap: wrap;
+      row-gap: 14px;
+    }
+
+    .hero-image {
+      position: relative;
+      right: auto;
+      top: auto;
+      width: 100%;
+      max-width: 340px;
+      margin: 24px auto 0;
+      display: block;
+      opacity: var(--hero-opacity);
+    }
+
+    .main-grid {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+
+    .writings-section {
+      grid-column: 1;
+      margin-top: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-orb"></div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <h1 class="site-name">Satwik Pandey</h1>
+      <nav class="header-links">
+        <a href="mailto:your@email.com">Email</a>
+        <div class="dot"></div>
+        <a href="https://twitter.com/" target="_blank">Twitter</a>
+        <div class="dot"></div>
+        <a href="https://github.com/" target="_blank">GitHub</a>
+        <div class="dot"></div>
+        <a href="https://scholar.google.com/" target="_blank">Scholar</a>
+      </nav>
+    </div>
+
+    <!-- Drop your bg-removed triangles PNG here -->
+    <img
+      class="hero-image"
+      src="tri-green.png"
+      alt="Green pixel triangles"
+      onerror="this.style.display='none'"
+    />
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-grid">
+
+    <!-- ABOUT -->
+    <div class="about-col">
+      <p class="section-label">About</p>
+
+      <p>I'm Satwik — I build AI systems that process visa documents at scale and then spend my research time figuring out why those same systems shouldn't be trusted blindly.</p>
+
+      <p>As an AI Research Engineer at VFS Global, I work on production document intelligence — 180K+ documents daily, multi-country visa processing, the kind of pipeline where a wrong extraction doesn't just fail a test case, it delays someone's life. That context shapes how I think about AI: models are impressive right up until you need them to know when they're wrong, explain why they failed, or recover gracefully when the input is messy and the stakes are real.</p>
+
+      <p>My research lives at the intersection of reliability, reasoning, and interpretability in large models. I'm interested in how language and multimodal systems behave once they're deployed outside clean benchmark settings: how they reason, how they fail, how they express uncertainty, and how we can build verification, correction, and evaluation mechanisms around them. A lot of my recent work has focused on uncertainty quantification, but I care more broadly about the interpretability and reliability of large models — making them safe to deploy in contexts where "usually right" isn't good enough.</p>
+
+      <p>I'm targeting Fall 2027 PhD programs to go deeper on these questions.</p>
+    </div>
+
+    <!-- PUBLICATIONS -->
+    <div class="pubs-col">
+      <p class="section-label">Research</p>
+
+      <div class="pub-list">
+
+        <!-- SELFDOUBT -->
+        <div class="pub-item">
+          <p class="pub-meta">2026 <span class="pub-venue">Submitted to COLM 2026</span></p>
+          <p class="pub-authors"><strong>S. Pandey</strong>, et al.</p>
+          <a class="pub-title" href="https://arxiv.org/abs/2604.06389" target="_blank" rel="noopener noreferrer">
+            SELFDOUBT: Uncertainty Quantification for Reasoning LLMs via the Hedge-to-Verify Ratio
+          </a>
+          <p class="pub-desc">Proposed an <strong>O(1) black box</strong> uncertainty framework that extracts behavioral hedge/verify signals from reasoning traces, significantly outperforming <strong>Semantic Entropy</strong> on discrimination (<i>p</i>=0.001) at <strong>10x lower cost</strong>; a zero-hedge gate achieves <strong>96.1% precision</strong> across 7 models and 3 benchmarks.</p>
+          <div class="pub-links">
+            <a class="pub-link" href="https://arxiv.org/abs/2604.06389" target="_blank" rel="noopener noreferrer">arXiv Preprint</a>
           </div>
-
-          <div class="intro-wrapper">
-
-              <div class="nav-wrapper">
-
-                <div class="dots-wrapper">
-                    <div id="dot-1" class="browser-dot"></div>
-                    <div id="dot-2" class="browser-dot"></div>
-                    <div id="dot-3" class="browser-dot"></div>
-                </div>
-
-
-                <ul id="navigation">
-      							<li><a href="#contactss">Contact</a></li>
-      					</ul>
-              </div>
-
-              <div class="left-column">
-
-                  <img id="profile_pic" src="images/1.jpg">
-                  <h5 style="text-align: center;line-height: 0;">Personalize Themes</h5>
-
-                  <div id="theme-options-wrapper">
-          						<div data-mode="light" id="light-mode" class="theme-dot"></div>
-          						<div data-mode="blue" id="blue-mode" class="theme-dot"></div>
-          						<div data-mode="green" id="green-mode" class="theme-dot"></div>
-          						<div data-mode="purple" id="purple-mode" class="theme-dot"></div>
-          				</div>
-                  <p id="settings-note">Theme settings will be saved for<br>your next vist</p>
-
-              </div>
-
-              <div class="right-column">
-                    <div id="preview-shadow">
-            						<div id="preview">
-              							<div id="corner-tl" class="corner"></div>
-              							<div id="corner-tr" class="corner"></div>
-              							<h3>What I Do</h3>
-              							<p>Aspiring Full Stack developer, working primarily on Django and React!</p>
-              							<div id="corner-br" class="corner"></div>
-              							<div id="corner-bl" class="corner"></div>
-            						</div>
-    					      </div>
-              </div>
-
-          </div>
-
         </div>
-      </section>
 
-      <section class="s2">
-        <div class="main-container">
+        <div class="pub-divider"></div>
 
-          <div class="about-wrapper">
-                  <div class="about-me">
-                        <h4>More about me</h4>
-
-                        <p>A first year engineering student adept in Python, Django, SQL, HTML, CSS, React having hands-on experience in graphic designing and web-development.</p>
-                        <p> Looking for internships and project-based opportunities in my field to utilize my potential and leverage my skills for mutual growth.</p>
-
-
-                        <hr>
-
-                        <h4>TOP EXPERTISE</h4>
-
-                        <p>Fullstack developer with primary focus on Django + React: <a target="_blank" href="Resume.pdf">Download Resume</a></p>
-
-                        <div id="skills">
-                          <ul>
-                            <li>Python</li>
-                            <li>Django</li>
-                            <li>React</li>
-                            <li>Graphic Designing</li>
-
-                          </ul>
-
-                          <ul>
-                            <li></li>
-                            <li>SQL</li>
-                            <li>C++</li>
-                            <li>HTML</li>
-                            <li>CSS</li>
-                          </ul>
-
-                        </div>
-                  </div>
-
-
-              <div class="social-links">
-                <img id="social_img" src="images/logo3.0.png">
-                <h3>Find me on LinkedIn and Twitter !</h3>
-
-                <a target="_blank" href="https://www.linkedin.com/in/satwik-pandey-430119229/">LinkedIn:  @Satwik Pandey</a>
-                <br>
-                <a target="_blank" href="https://twitter.com/ergo_edge">Twitter: @ergo_edge</a>
-              </div>
-            </div>
-
-
-
-
-
+        <!-- DON'T BLINK -->
+        <div class="pub-item">
+          <p class="pub-meta">2026 <span class="pub-venue">Submitted to UAI 2026</span></p>
+          <p class="pub-authors">S. Raghu, <strong>S. Pandey</strong></p>
+          <a class="pub-title" href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener noreferrer">
+            Don't Blink: Evidence Collapse during Multimodal Reasoning
+          </a>
+          <p class="pub-desc">Identified a universal <strong>evidence collapse</strong> phenomenon in reasoning VLMs, observing visual attention drops up to <strong>90.8%</strong> during generation and discovered a <strong>task-conditional failure regime</strong> where confident but visually disengaged predictions are hazardous on sustained visual reference tasks but benign on symbolic tasks.</p>
+          <div class="pub-links">
+            <a class="pub-link" href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener noreferrer">arXiv Preprint</a>
+          </div>
         </div>
-        </section>
 
-        <section class="s1">
-          <div class="main-container">
-            <h3 style="text-align: center;">Some of my past projects</h3>
+        <div class="pub-divider"></div>
 
-                  <div class="post-wrapper">
+        <!-- ROT -->
+        <div class="pub-item">
+          <p class="pub-meta">Under Review <span class="pub-venue">Journal of Systems and Software</span></p>
+          <p class="pub-authors"><strong>S. Pandey</strong>, et al.</p>
+          <p class="pub-title">Repair of Thought: Advancing Automated Program Repair through a Dual-Model Reasoning Framework</p>
+          <p class="pub-desc">Introduced a function-level APR framework achieving an <strong>SOTA 83.1% plausible repair rate</strong> on Defects4J, with an automated verification pipeline combining AST alignment, control-flow symbolic analysis, and semantic checks.</p>
+        </div>
 
-                    <div>
-                      <div class="post">
-                        <img class="thumbnail" src="images/portfolio.png">
-                        <div class="post-preview">
-                          <h6 class="post-title">Personal Webpage</h6>
-                          <p class="post-intro">My first attempt at making a subtle static personal portfolio webpage using solely html and css</p>
-                          <a target="_blank" href="https://codepen.io/ErgoEdge/pen/jOGmmqB">Read More</a>
-                        </div>
-                      </div>
-                    </div>
+      </div>
+    </div>
 
-                    <div>
-                      <div class="post">
-                        <img class="thumbnail" src="images/hckthn.png">
-                        <div class="post-preview">
-                          <h6 class="post-title">Online Store - The Artisans</h6>
-                          <p class="post-intro"><b>Hackathon winning project:</b> <br> E-comm Website for upliftment of skilled Artisans of our country</p>
-                          <a target="_blank" href="https://secret-wave-13926.herokuapp.com/">Read More</a>
-                        </div>
-                      </div>
-                    </div>
+  </div>
+</div>
 
-                    <div>
-                      <div class="post">
-                        <img class="thumbnail" src="images/tdp.png">
-                        <div class="post-preview">
-                          <h6 class="post-title">Technical Documentation Page</h6>
-                          <p class="post-intro">A Static Technical Documentation Page having a list of the best places to visit in Asia</p>
-                          <a target="_blank" href="https://codepen.io/ErgoEdge/pen/jOGmmqB">Read More</a>
-                        </div>
-                      </div>
-                    </div>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 Satwik Pandey</p>
+  </div>
+</footer>
 
-                  </div>
-          </div>
-        </section>
-
-        <section id="contactss" class="s2">
-          <div class="main-container">
-
-            <a href=""></a>
-            <h3 style="text-align: center;">Get In Touch</h3>
-
-            <form id="contact-form">
-                <a name="contact"></a>
-
-                <label>Name</label>
-                <input class="input-field" type="text" name="name">
-
-                <label>Subject</label>
-                <input class="input-field" type="text" name="subject">
-
-                <label>Email</label>
-                <input class="input-field" type="text" name="email">
-
-                <label>Message</label>
-                <textarea class="input-field" name="message"></textarea>
-
-                <input id="submit-btn" type="submit" value="Send">
-            </form>
-
-
-
-          </div>
-        </section>
-
-        <script type="text/javascript" src="script.js"></script>
-
-
-
-
-
-  </body>
+</body>
 </html>
