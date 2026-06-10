@@ -16,11 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
     --bg:           #f8f4ea;
@@ -38,18 +34,8 @@
     --font-body:    'EB Garamond', Georgia, serif;
   }
 
-  html {
-    font-size: 18px;
-    background: var(--bg);
-    color: var(--text);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body {
-    font-family: var(--font-body);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  html { font-size: 18px; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; }
 
   body::before {
     content: '';
@@ -61,24 +47,9 @@
     z-index: 0;
   }
 
-  /* ─── NAVBAR ─────────────────────────────── */
-  .navbar {
-    position: relative;
-    z-index: 10;
-    border-bottom: 1px solid var(--green-edge);
-  }
-
-  .navbar-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 52px;
-  }
-
-  .navbar-name {
+  .navbar { position: relative; z-index: 10; border-bottom: 1px solid var(--green-edge); }
+  .navbar-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .navbar-name, .navbar-links a {
     font-family: var(--font-body);
     font-size: 0.78rem;
     letter-spacing: 0.14em;
@@ -87,359 +58,78 @@
     text-decoration: none;
     transition: color 0.2s;
   }
-  .navbar-name:hover { color: var(--green); }
+  .navbar-name:hover, .navbar-links a:hover, .navbar-links a.active { color: var(--green); }
+  .navbar-links { display: flex; align-items: center; gap: 32px; }
+  .nav-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-dim); }
 
-  .navbar-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-  .navbar-links a {
-    font-family: var(--font-body);
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .navbar-links a:hover { color: var(--green); }
-  .navbar-links a.active { color: var(--green); }
-  .nav-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--text-dim);
-  }
+  .page-wrap { max-width: 900px; margin: 0 auto; padding: 64px 48px 96px; position: relative; z-index: 1; }
 
-  /* ─── PAGE WRAP ──────────────────────────── */
-  .page-wrap {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 64px 48px 96px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ─── CV HEADER ──────────────────────────── */
-  .cv-header {
-    position: relative;
-    margin-bottom: 48px;
-    padding-bottom: 36px;
-    border-bottom: 1px solid var(--green-edge);
-  }
-
-  .cv-header-left {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    width: 100%;
-  }
-
-  .cv-avatar {
-    width: 125px;
-    height: 125px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center top;
-    border: 1px solid var(--green-edge);
-    flex-shrink: 0;
-    filter: saturate(0.9);
-  }
-
-  .cv-name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2rem, 3.8vw, 3.4rem);
-    letter-spacing: -0.01em;
-    line-height: 1;
-    color: var(--heading);
-    margin-bottom: 14px;
-  }
-
-  .cv-contacts {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-  }
-
-  .cv-contacts a {
-    font-size: 0.78rem;
-    letter-spacing: 0.015em;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-  }
+  .cv-header { position: relative; margin-bottom: 48px; padding-bottom: 36px; border-bottom: 1px solid var(--green-edge); }
+  .cv-header-left { display: flex; align-items: center; gap: 24px; width: 100%; }
+  .cv-avatar { width: 125px; height: 125px; border-radius: 50%; object-fit: cover; object-position: center top; border: 1px solid var(--green-edge); flex-shrink: 0; filter: saturate(0.9); }
+  .cv-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 3.8vw, 3.4rem); letter-spacing: -0.01em; line-height: 1; color: var(--heading); margin-bottom: 14px; }
+  .cv-contacts { display: flex; flex-wrap: wrap; align-items: center; max-width: 620px; }
+  .cv-contacts a { font-size: 0.78rem; letter-spacing: 0.015em; color: var(--text-muted); text-decoration: none; transition: color 0.2s; display: inline-flex; align-items: center; white-space: nowrap; }
   .cv-contacts a:hover { color: var(--green); }
+  .cv-contacts a + a::before { content: '•'; color: var(--text-dim); margin: 0 10px; }
 
-  .cv-contacts a + a::before {
-    content: '•';
-    color: var(--text-dim);
-    margin: 0 10px;
-  }
-
-  /* Download button */
   .download-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green);
-    text-decoration: none;
-    border: 1px solid var(--green-border);
-    padding: 9px 18px;
-    border-radius: 2px;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-    white-space: nowrap;
-    flex-shrink: 0;
+    display: inline-flex; align-items: center; gap: 8px; position: absolute; top: 0; right: 0;
+    font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--green); text-decoration: none; border: 1px solid var(--green-border); padding: 9px 18px; border-radius: 2px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s; white-space: nowrap; flex-shrink: 0;
   }
-  .download-btn:hover {
-    background: var(--green-faint);
-    border-color: var(--green);
-  }
-  .download-btn svg {
-    width: 12px;
-    height: 12px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    flex-shrink: 0;
-  }
+  .download-btn:hover { background: var(--green-faint); border-color: var(--green); }
+  .download-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
-  /* ─── SECTION ────────────────────────────── */
-  .cv-section {
-    margin-bottom: 44px;
-  }
+  .cv-section { margin-bottom: 44px; }
+  .cv-section:last-child { margin-bottom: 0; }
+  .section-label { font-family: var(--font-body); font-size: 0.70rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--green-edge); display: block; }
 
-  .cv-section:last-child {
-    margin-bottom: 0;
-  }
+  .entry { display: grid; grid-template-columns: 1fr auto; gap: 0 24px; margin-bottom: 28px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-title { font-family: var(--font-display); font-size: calc(1.15rem + 2px); font-weight: 600; color: var(--heading); line-height: 1.25; margin-bottom: 2px; }
+  .entry-sub { font-size: calc(0.85rem + 2px); color: var(--text-muted); margin-bottom: 2px; font-style: italic; }
+  .entry-detail { font-size: calc(0.82rem + 2px); color: var(--text-dim); letter-spacing: 0.02em; }
+  .entry-date { font-size: calc(0.80rem + 2px); color: var(--text-dim); white-space: nowrap; padding-top: 3px; letter-spacing: 0.02em; text-align: right; }
 
-  .section-label {
-    font-family: var(--font-body);
-    font-size: 0.70rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--green-edge);
-    display: block;
-  }
+  .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
+  .bullet-list li { font-size: calc(0.88rem + 2px); line-height: 1.65; color: var(--text-muted); padding-left: 16px; position: relative; }
+  .bullet-list li::before { content: '—'; position: absolute; left: 0; color: var(--green-border); font-size: 0.75rem; top: 2px; }
+  .bullet-list strong { color: var(--text); font-weight: 600; }
 
-  /* ─── ENTRY ROW ──────────────────────────── */
-  .entry {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0 24px;
-    margin-bottom: 28px;
-  }
+  .interests { display: flex; flex-wrap: wrap; gap: 8px; }
+  .interest-tag { font-family: var(--font-body); font-size: calc(0.80rem + 2px); color: var(--text-muted); letter-spacing: 0.04em; }
+  .interest-tag::after { content: ' ·'; color: var(--green-border); }
+  .interest-tag:last-child::after { content: ''; }
 
-  .entry:last-child {
-    margin-bottom: 0;
-  }
+  .pub-entry { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--green-edge); }
+  .pub-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .pub-meta { font-size: calc(0.78rem + 2px); color: var(--text-dim); letter-spacing: 0.04em; margin-bottom: 4px; }
+  .pub-meta .venue { color: var(--green-dim); font-style: italic; margin-left: 6px; }
+  .pub-authors { font-size: calc(0.82rem + 2px); color: var(--text-dim); margin-bottom: 4px; }
+  .pub-authors strong { color: var(--text-muted); }
+  .pub-title { font-family: var(--font-display); font-size: calc(1.1rem + 2px); font-weight: 600; color: var(--heading); line-height: 1.3; margin-bottom: 10px; }
+  .pub-links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 10px; }
+  .pub-link { font-size: calc(0.70rem + 1px); letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); text-decoration: none; border-bottom: 1px solid var(--green-border); padding-bottom: 1px; }
+  .pub-link:hover { color: var(--green-hover); border-color: var(--green-hover); }
 
-  .entry-title {
-    font-family: var(--font-display);
-    font-size: calc(1.15rem + 2px);
-    font-weight: 600;
-    color: var(--heading);
-    line-height: 1.25;
-    margin-bottom: 2px;
-  }
+  footer { border-top: 1px solid var(--green-edge); padding: 28px 0; text-align: center; position: relative; z-index: 1; }
+  footer p { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--text-dim); font-family: var(--font-body); }
 
-  .entry-sub {
-    font-size: calc(0.85rem + 2px);
-    color: var(--text-muted);
-    margin-bottom: 2px;
-    font-style: italic;
-  }
-
-  .entry-detail {
-    font-size: calc(0.82rem + 2px);
-    color: var(--text-dim);
-    letter-spacing: 0.02em;
-  }
-
-  .entry-date {
-    font-size: calc(0.80rem + 2px);
-    color: var(--text-dim);
-    white-space: nowrap;
-    padding-top: 3px;
-    letter-spacing: 0.02em;
-    text-align: right;
-  }
-
-  /* ─── BULLET LIST ────────────────────────── */
-  .bullet-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 10px;
-  }
-
-  .bullet-list li {
-    font-size: calc(0.88rem + 2px);
-    line-height: 1.65;
-    color: var(--text-muted);
-    padding-left: 16px;
-    position: relative;
-  }
-
-  .bullet-list li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--green-border);
-    font-size: 0.75rem;
-    top: 2px;
-  }
-
-  .bullet-list strong {
-    color: var(--text);
-    font-weight: 600;
-  }
-
-  /* ─── RESEARCH INTERESTS ─────────────────── */
-  .interests {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .interest-tag {
-    font-family: var(--font-body);
-    font-size: calc(0.80rem + 2px);
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-  }
-
-  .interest-tag::after {
-    content: ' ·';
-    color: var(--green-border);
-  }
-
-  .interest-tag:last-child::after {
-    content: '';
-  }
-
-  /* ─── PUBLICATION ENTRIES ────────────────── */
-  .pub-entry {
-    margin-bottom: 28px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--green-edge);
-  }
-
-  .pub-entry:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-
-  .pub-meta {
-    font-size: calc(0.78rem + 2px);
-    color: var(--text-dim);
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
-  }
-
-  .pub-meta .venue {
-    color: var(--green-dim);
-    font-style: italic;
-    margin-left: 6px;
-  }
-
-  .pub-authors {
-    font-size: calc(0.82rem + 2px);
-    color: var(--text-dim);
-    margin-bottom: 4px;
-  }
-
-  .pub-authors strong {
-    color: var(--text-muted);
-  }
-
-  .pub-title {
-    font-family: var(--font-display);
-    font-size: calc(1.1rem + 2px);
-    font-weight: 600;
-    color: var(--heading);
-    line-height: 1.3;
-    margin-bottom: 10px;
-  }
-
-  /* ─── FOOTER ─────────────────────────────── */
-  footer {
-    border-top: 1px solid var(--green-edge);
-    padding: 28px 0;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  footer p {
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    color: var(--text-dim);
-    font-family: var(--font-body);
-  }
-
-  /* ─── RESPONSIVE ─────────────────────────── */
   @media (max-width: 768px) {
     .navbar-inner { padding: 0 24px; }
     .page-wrap { padding: 48px 24px 72px; }
-
-    .cv-header {
-      padding-bottom: 28px;
-    }
-
-    .cv-header-left {
-      gap: 18px;
-    }
-
-    .cv-avatar {
-      width: 101px;
-      height: 101px;
-    }
-
-    .cv-contacts {
-      flex-wrap: wrap;
-      gap: 6px 12px;
-    }
-
-    .cv-contacts a + a::before {
-      margin: 0 8px;
-    }
-
-    .download-btn {
-      position: static;
-      margin-top: 14px;
-    }
-
-    .entry {
-      grid-template-columns: 1fr;
-      gap: 2px;
-    }
-
-    .entry-date {
-      text-align: left;
-      padding-top: 0;
-    }
+    .cv-header { padding-bottom: 28px; }
+    .cv-header-left { gap: 18px; align-items: flex-start; }
+    .cv-avatar { width: 101px; height: 101px; }
+    .cv-contacts { flex-wrap: wrap; gap: 6px 0; }
+    .cv-contacts a + a::before { margin: 0 8px; }
+    .download-btn { position: static; margin-top: 18px; }
+    .entry { grid-template-columns: 1fr; gap: 2px; }
+    .entry-date { text-align: left; padding-top: 0; }
   }
 
-  /* ─── PRINT STYLES ───────────────────────── */
   @media print {
     .navbar, footer, .download-btn { display: none; }
     body::before { display: none; }
@@ -450,7 +140,6 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-name">Satwik Pandey</a>
@@ -462,29 +151,27 @@
   </div>
 </nav>
 
-<!-- CV CONTENT -->
 <div class="page-wrap">
-
-  <!-- HEADER -->
   <div class="cv-header">
     <div class="cv-header-left">
       <img class="cv-avatar" src="resume-img.jpg" alt="Satwik Pandey" onerror="this.style.display='none'">
       <div>
         <h1 class="cv-name">Satwik Pandey</h1>
         <div class="cv-contacts">
-          <a href="mailto:psatwik2711@gmail.com">psatwik2711@gmail.com</a>
-          <a href="https://linkedin.com/in/satwik-pandey" target="_blank" rel="noopener">linkedin.com/in/satwik-pandey</a>
-          <a href="https://github.com/satwik2711" target="_blank" rel="noopener">github.com/satwik2711</a>
+          <a href="mailto:psatwik2711@gmail.com">mail</a>
+          <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&authuser=2&user=28p0C3wAAAAJ" target="_blank" rel="noopener">scholar</a>
+          <a href="index.html">website</a>
+          <a href="https://linkedin.com/in/satwik-pandey" target="_blank" rel="noopener">linkedin</a>
+          <a href="https://github.com/satwik2711" target="_blank" rel="noopener">github</a>
         </div>
       </div>
     </div>
-    <a class="download-btn" href="research-2026.pdf" download="Satwik_Pandey_CV.pdf">
+    <a class="download-btn" href="satwik-research.pdf" download="Satwik_Pandey_CV.pdf">
       <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Download PDF
     </a>
   </div>
 
-  <!-- EDUCATION -->
   <div class="cv-section">
     <span class="section-label">Education</span>
     <div class="entry">
@@ -497,51 +184,73 @@
     </div>
   </div>
 
-  <!-- RESEARCH INTERESTS -->
   <div class="cv-section">
     <span class="section-label">Research Interests</span>
     <div class="interests">
       <span class="interest-tag">Natural Language Processing</span>
       <span class="interest-tag">Large Language Models</span>
       <span class="interest-tag">Uncertainty Quantification</span>
+      <span class="interest-tag">Reliability</span>
+      <span class="interest-tag">Reasoning</span>
       <span class="interest-tag">Trustworthy AI</span>
       <span class="interest-tag">AI Safety / Security</span>
     </div>
   </div>
 
-  <!-- PUBLICATIONS -->
   <div class="cv-section">
     <span class="section-label">Publications &amp; Preprints</span>
 
     <div class="pub-entry">
-      <div class="pub-meta">2026 <span class="venue">Submitted to COLM 2026</span></div>
-      <div class="pub-authors"><strong>S. Pandey</strong>, et al.</div>
+      <div class="pub-meta">arXiv preprint <span class="venue">ICML 2026 CTB · ICML 2026 FAGEN</span></div>
+      <div class="pub-authors">Suresh Raghu*, <strong>Satwik Pandey*</strong>, Shashwat Pandey</div>
+      <div class="pub-title">Proper Scoring Rules for Agentic Uncertainty Quantification</div>
+      <ul class="bullet-list">
+        <li>Introduced a family of <strong>strictly proper</strong> trajectory-level scoring rules for evaluating uncertainty in LM agents, with a censored-trace extension and negative results establishing that standard trajectory-level calibration metrics (ECE, Brier) are not strictly proper in the agentic setting.</li>
+      </ul>
+      <div class="pub-links">
+        <a class="pub-link" href="https://arxiv.org/abs/2605.24756" target="_blank" rel="noopener">arXiv Preprint</a>
+      </div>
+    </div>
+
+    <div class="pub-entry">
+      <div class="pub-meta">arXiv preprint <span class="venue">ICLR 2026 FAGEN</span></div>
+      <div class="pub-authors"><strong>Satwik Pandey*</strong>, Suresh Raghu*, Shashwat Pandey</div>
       <div class="pub-title">SELFDOUBT: Uncertainty Quantification for Reasoning LLMs via the Hedge-to-Verify Ratio</div>
       <ul class="bullet-list">
-        <li>Proposed an O(1) black-box uncertainty framework extracting behavioral hedge/verify signals from reasoning traces, significantly outperforming Semantic Entropy on discrimination (<i>p</i>=0.001) at 10× lower cost; a zero-hedge gate achieves 96.1% precision across 7 models and 3 benchmarks.</li>
+        <li>Proposed an O(1) black-box uncertainty framework that extracts behavioral hedge/verify signals from reasoning traces, significantly outperforming Semantic Entropy on discrimination (<i>p</i>=0.001) at 10× lower cost; a zero-hedge gate achieves 96.1% precision across 7 models and 3 benchmarks.</li>
       </ul>
+      <div class="pub-links">
+        <a class="pub-link" href="https://arxiv.org/abs/2604.06389" target="_blank" rel="noopener">arXiv Preprint</a>
+        <a class="pub-link" href="https://github.com/satwik2711/SelfDoubt" target="_blank" rel="noopener">Code</a>
+      </div>
     </div>
 
     <div class="pub-entry">
-      <div class="pub-meta">2026 <span class="venue">Submitted to UAI 2026</span></div>
-      <div class="pub-authors">S. Raghu, <strong>S. Pandey</strong></div>
+      <div class="pub-meta">arXiv preprint <span class="venue">Under Review</span></div>
+      <div class="pub-authors">Suresh Raghu*, <strong>Satwik Pandey*</strong></div>
       <div class="pub-title">Don't Blink: Evidence Collapse during Multimodal Reasoning</div>
       <ul class="bullet-list">
-        <li>Identified a universal evidence collapse phenomenon in reasoning VLMs, observing visual attention drops up to 90.8% during generation and a task-conditional failure regime where confident but visually disengaged predictions are hazardous on sustained visual reference tasks but benign on symbolic tasks.</li>
+        <li>Identified a universal evidence collapse phenomenon in reasoning VLMs, observing visual attention drops up to 90.8% during generation and discovering a task-conditional failure regime where confident but visually disengaged predictions are hazardous on sustained visual reference tasks but benign on symbolic tasks.</li>
       </ul>
+      <div class="pub-links">
+        <a class="pub-link" href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener">arXiv Preprint</a>
+        <a class="pub-link" href="https://github.com/satwik2711/Dont-Blink" target="_blank" rel="noopener">Code</a>
+      </div>
     </div>
 
     <div class="pub-entry">
-      <div class="pub-meta">Under Review <span class="venue">Journal of Systems and Software</span></div>
-      <div class="pub-authors"><strong>S. Pandey</strong>, et al.</div>
+      <div class="pub-meta">Manuscript under review <span class="venue">Journal of Systems and Software</span></div>
+      <div class="pub-authors"><strong>Satwik Pandey</strong>, et al.</div>
       <div class="pub-title">Repair of Thought: Advancing Automated Program Repair through a Dual-Model Reasoning Framework</div>
       <ul class="bullet-list">
-        <li>Introduced a function-level APR framework achieving an SOTA 83.1% plausible repair rate on Defects4J, with an automated verification pipeline combining AST alignment, control-flow symbolic analysis, and semantic checks.</li>
+        <li>Introduced a function-level APR framework achieving a SOTA 83.1% plausible repair rate on Defects4J, with an automated verification pipeline combining AST alignment, control-flow symbolic analysis, and semantic checks.</li>
       </ul>
+      <div class="pub-links">
+        <a class="pub-link" href="https://github.com/satwik2711/Repair-Of-Thought" target="_blank" rel="noopener">Code</a>
+      </div>
     </div>
   </div>
 
-  <!-- RESEARCH EXPERIENCE -->
   <div class="cv-section">
     <span class="section-label">Research Experience</span>
 
@@ -555,8 +264,7 @@
     </div>
     <ul class="bullet-list" style="margin-bottom: 28px;">
       <li>Investigated trustworthy logical reasoning in LLMs by translating natural language outputs into Prolog-based logic constraints to mathematically verify consistency and detect hallucinations.</li>
-      <li>Designed a Modular RAG architecture decoupling knowledge retrieval from reasoning, reducing false positive hallucination detection by integrating external ground-truth validation.</li>
-      <li>Developed an automated evaluation pipeline to benchmark trustworthiness, contributing to an open-source framework for explainable error reasoning in AI systems.</li>
+      <li>Designed a Modular RAG architecture to decouple knowledge retrieval from reasoning, reducing false positive hallucination detection by integrating external ground-truth validation.</li>
     </ul>
 
     <div class="entry" style="margin-bottom: 10px;">
@@ -572,7 +280,6 @@
     </ul>
   </div>
 
-  <!-- PROFESSIONAL EXPERIENCE -->
   <div class="cv-section">
     <span class="section-label">Professional Experience</span>
 
@@ -585,16 +292,14 @@
       <div class="entry-date">Dec 2024 – Present</div>
     </div>
     <ul class="bullet-list">
-      <li>Investigated dynamic execution paths for multi-agent frameworks. Designed a complexity-based routing mechanism that differentiates between deterministic tasks (handled by parsers) and ambiguous instances (routed to reasoning-capable VLMs), optimizing the trade-off between inference cost and reasoning accuracy.</li>
+      <li>Investigated dynamic execution paths for multi-agent frameworks. Designed a complexity-based routing mechanism that differentiates between deterministic tasks handled by parsers and ambiguous instances routed to reasoning-capable VLMs, optimizing the trade-off between inference cost and reasoning accuracy.</li>
       <li>Integrated a two-stage confidence pipeline: token-level logit probabilities aggregated via Shannon entropy serve as a lightweight first-pass filter for extraction uncertainty, with high-entropy predictions escalated to a reasoning VLM-as-a-Judge for cross-modal extraction verification.</li>
       <li>Designed a trace-guided re-extraction mechanism for cascade-rejected fields that fail both entropy screening and judge validation. The judge's reasoning traces are converted into corrective context for a secondary extraction model, enabling targeted recovery from extraction errors such as character misreads, boundary confusion, and semantic misattribution.</li>
       <li>Designed a multi-level verification framework for biometric photo validation, separating signal-level quality assessment from semantic-level attribute verification with fine-tuned VLMs. The staged design isolated distinct failure modes and improved the interpretability of rejection decisions.</li>
     </ul>
   </div>
-
 </div>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2026 Satwik Pandey</p>
 </footer>
