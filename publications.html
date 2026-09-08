@@ -70,6 +70,7 @@
   .paper-item:last-child { border-bottom: none; }
   .paper-media { position: relative; aspect-ratio: 4 / 3; border: 1px solid var(--green-edge); background: var(--green-faint); overflow: hidden; }
   .paper-media img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.92) contrast(0.98); }
+  .paper-media--contain img { object-fit: contain; background: #fff; }
   .paper-media.is-missing img { display: none; }
   .paper-placeholder { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px; text-align: center; color: var(--green-dim); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
   .paper-media.is-missing .paper-placeholder { display: flex; }
@@ -99,9 +100,9 @@
   <div class="navbar-inner">
     <a href="index.html" class="navbar-name">Satwik Pandey</a>
     <div class="navbar-links">
-      <a href="blogs.html">Blogs</a>
+      <a href="index.html">Home</a>
       <div class="nav-dot"></div>
-      <a href="publications.html" class="active">Publications</a>
+      <a href="publications.html" class="active" aria-current="page">Publications</a>
       <div class="nav-dot"></div>
       <a href="cv.html">CV</a>
     </div>
@@ -116,12 +117,27 @@
 
   <section class="paper-list">
     <article class="paper-item">
+      <div class="paper-media paper-media--contain">
+        <img src="confidently-wrong.png" alt="Surface-indistinguishability results from Confidently Wrong, Silently So">
+      </div>
+      <div>
+        <p class="paper-meta">Preprint · arXiv 2026</p>
+        <h2 class="paper-title">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</h2>
+        <p class="paper-authors">S. Pandey*, <strong>S. Pandey*</strong>, S. Raghu</p>
+        <p class="paper-desc">We audit a deployed on-device language model, finding confident failures that user-visible signals cannot reliably detect while a black-box consistency wrapper substantially recovers reliability.</p>
+        <div class="paper-links">
+          <a class="paper-link" href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">arXiv</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="paper-item">
       <div class="paper-media">
         <img src="tps.png" data-jpg="paper-1.jpg" alt="Paper preview for Proper Scoring Rules for Agentic Uncertainty Quantification" onerror="if(this.dataset.fallback){this.parentElement.classList.add('is-missing');}else{this.dataset.fallback='1';this.src=this.dataset.jpg;}">
         <div class="paper-placeholder">paper-1.png / paper-1.jpg</div>
       </div>
       <div>
-        <p class="paper-meta">Preprint · ICML '26 CTB · FAGEN</p>
+        <p class="paper-meta">ICML '26 CTB · FAGEN</p>
         <h2 class="paper-title">Proper Scoring Rules for Agentic Uncertainty Quantification</h2>
         <p class="paper-authors">S. Raghu*, <strong>S. Pandey*</strong>, S. Pandey</p>
         <p class="paper-desc">A family of strictly proper trajectory-level scoring rules for evaluating uncertainty in LM agents, including a censored-trace extension and negative results for common calibration metrics.</p>
@@ -137,7 +153,7 @@
         <div class="paper-placeholder">paper-2.png / paper-2.jpg</div>
       </div>
       <div>
-        <p class="paper-meta">Preprint · ICML '26 FAGEN</p>
+        <p class="paper-meta">ICML '26 FAGEN</p>
         <h2 class="paper-title">SELFDOUBT: Uncertainty Quantification for Reasoning LLMs via the Hedge-to-Verify Ratio</h2>
         <p class="paper-authors"><strong>S. Pandey*</strong>, S. Raghu*, S. Pandey</p>
         <p class="paper-desc">A black-box uncertainty framework that extracts hedge and verify signals from reasoning traces, improving discrimination at lower inference cost.</p>
@@ -154,7 +170,7 @@
         <div class="paper-placeholder">paper-3.png / paper-3.jpg</div>
       </div>
       <div>
-        <p class="paper-meta">Preprint · Under Review</p>
+        <p class="paper-meta">COLM '26 AIW · SCI-FM</p>
         <h2 class="paper-title">Don't Blink: Evidence Collapse during Multimodal Reasoning</h2>
         <p class="paper-authors">S. Raghu*, <strong>S. Pandey*</strong></p>
         <p class="paper-desc">An analysis of evidence collapse in reasoning VLMs, showing how visual grounding can decay during generation even when model confidence remains high.</p>
@@ -171,7 +187,7 @@
         <div class="paper-placeholder">paper-4.png / paper-4.jpg</div>
       </div>
       <div>
-        <p class="paper-meta">Under Review · JSS</p>
+        <p class="paper-meta">Preprint</p>
         <h2 class="paper-title">Repair of Thought: Advancing Automated Program Repair through a Dual-Model Reasoning Framework</h2>
         <p class="paper-authors"><strong>S. Pandey</strong>, et al.</p>
         <p class="paper-desc">A function-level automated program repair framework combining dual-model reasoning with verification through AST alignment, control-flow symbolic analysis, and semantic checks.</p>

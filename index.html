@@ -79,7 +79,7 @@
     font-family: var(--font-body); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--text-muted); text-decoration: none; transition: color 0.2s;
   }
-  .navbar-name:hover, .navbar-links a:hover { color: var(--green); }
+  .navbar-name:hover, .navbar-links a:hover, .navbar-links a.active { color: var(--green); }
   .navbar-links { display: flex; align-items: center; gap: 32px; }
   .navbar-links .nav-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-dim); }
 
@@ -170,7 +170,7 @@
   <div class="navbar-inner">
     <a href="index.html" class="navbar-name">Satwik Pandey</a>
     <div class="navbar-links">
-      <a href="blogs.html">Blogs</a>
+      <a href="index.html" class="active" aria-current="page">Home</a>
       <div class="nav-dot"></div>
       <a href="publications.html">Publications</a>
       <div class="nav-dot"></div>
@@ -187,7 +187,7 @@
         Open to PhD · Fall 2027
       </div>
       <h1 class="site-name">Satwik Pandey</h1>
-      <p class="site-tagline">Independent Researcher | AI Research Engineer @ VFS Global</p>
+      <p class="site-tagline">Research Collaborator @ MBZUAI | AI Research Engineer @ VFS Global</p>
       <nav class="header-links">
         <a href="mailto:psatwik2711@gmail.com">Email</a>
         <div class="dot"></div>
@@ -211,10 +211,10 @@
         <p class="section-label">About</p>
       </div>
       <div class="about-body">
-        <p>Hi, I’m Satwik. AI Research Engineer at VFS Global. Independently researching reliability, reasoning, and interpretability of language models.</p>
+        <p>Hi, I’m Satwik. I’m an AI Research Engineer at VFS Global and a Research Collaborator with Kang Lab at MBZUAI, working on the reliability, reasoning, and interpretability of language models.</p>
         <p>At VFS Global, I work on production document intelligence for multi-country visa processing. I build extraction and verification systems for real document workflows, including multimodal validation, confidence-aware routing, and checks around model outputs. These systems sit in workflows that process 4M+ documents daily.</p>
         <p>My research is on reasoning and agentic systems, with a focus on making them safe, reliable, and uncertainty-aware. Much of that comes down to calibration and failure detection, and to whether these systems hold up once they're deployed rather than just benchmarked.</p>
-        <p>Previously, I worked on trustworthy reasoning for LLMs at UCSC’s AIEA Lab. During undergrad, I also spent roughly two years across research, open-source, and engineering internships, mostly spanning server-side systems and applied AI pipelines.</p>
+        <p>At Kang Lab, I study whether self-verification language in reasoning models reflects the causal computation needed to improve correctness and calibration. Previously, I worked on trustworthy reasoning for LLMs at UCSC’s AIEA Lab.</p>
       </div>
     </section>
 
@@ -223,6 +223,18 @@
         <p class="section-label">News</p>
       </div>
       <div class="news-list">
+        <div class="news-item">
+          <div class="news-date">Sep 2026</div>
+          <p class="news-text"><a href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener">Don’t Blink</a> was accepted at the <strong>Actionable Interpretability Workshop (AIW)</strong> and the <strong>Scientific Understanding of Foundation Models Workshop (SCI-FM)</strong> at COLM 2026.</p>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Aug 2026</div>
+          <p class="news-text">New preprint: <a href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</a>.</p>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Aug 2026</div>
+          <p class="news-text">Joined <strong>Kang Lab at MBZUAI</strong> as a Research Collaborator, advised by Prof. Jian Kang.</p>
+        </div>
         <div class="news-item">
           <div class="news-date">May 2026</div>
           <p class="news-text">Two papers accepted at the <strong>Failure Modes in Agentic AI (FAGEN)</strong> workshop at ICML 2026: <a href="https://arxiv.org/abs/2604.06389" target="_blank" rel="noopener">SELFDOUBT</a> and <a href="https://arxiv.org/abs/2605.24756" target="_blank" rel="noopener">Proper Scoring Rules for Agentic Uncertainty Quantification</a>.</p>
@@ -259,6 +271,21 @@
         <article class="pub-item">
           <div class="pub-side">
             <span class="pub-year">Preprint</span>
+            <span class="pub-venue">arXiv 2026</span>
+          </div>
+          <div class="pub-body">
+            <p class="pub-authors">S. Pandey*, <strong>S. Pandey*</strong>, S. Raghu</p>
+            <span class="pub-title">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</span>
+            <p class="pub-desc">We audit a deployed on-device language model, finding confident failures that user-visible signals cannot reliably detect while a black-box consistency wrapper substantially recovers reliability.</p>
+            <div class="pub-links">
+              <a class="pub-link" href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">arXiv 2026</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-side">
+            <span class="pub-year">Preprint</span>
             <span class="pub-venue">ICML '26<br>CTB · FAGEN</span>
           </div>
           <div class="pub-body">
@@ -290,7 +317,7 @@
         <article class="pub-item">
           <div class="pub-side">
             <span class="pub-year">Preprint</span>
-            <span class="pub-venue">Under Review</span>
+            <span class="pub-venue">COLM '26<br>AIW · SCI-FM</span>
           </div>
           <div class="pub-body">
             <p class="pub-authors">S. Raghu*, <strong>S. Pandey*</strong></p>
