@@ -92,6 +92,7 @@
   }
 
   .navbar-name:hover { color: var(--green); }
+  .navbar-name { white-space: nowrap; }
 
   .navbar-links {
     display: flex;
@@ -239,8 +240,9 @@
   }
 
   @media (max-width: 768px) {
-    .navbar-inner { padding: 0 24px; }
-    .navbar-links { gap: 16px; }
+    .navbar-inner { padding: 0 16px; }
+    .navbar-name, .navbar-links a { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .navbar-links { gap: 10px; }
     .main { padding: 60px 24px; }
   }
 </style>

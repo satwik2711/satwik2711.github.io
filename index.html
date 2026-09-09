@@ -79,6 +79,7 @@
     font-family: var(--font-body); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--text-muted); text-decoration: none; transition: color 0.2s;
   }
+  .navbar-name { white-space: nowrap; }
   .navbar-name:hover, .navbar-links a:hover, .navbar-links a.active { color: var(--green); }
   .navbar-links { display: flex; align-items: center; gap: 32px; }
   .navbar-links .nav-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-dim); }
@@ -88,11 +89,11 @@
   .phd-badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-body); font-size: 0.78rem; letter-spacing: 0.08em; color: var(--green-dim); border: 1px solid var(--green-border); border-radius: 2px; padding: 4px 10px 4px 8px; margin-bottom: 20px; }
   .phd-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
   .site-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 4.2vw, 4.4rem); letter-spacing: -0.01em; line-height: 1; color: var(--heading); margin-bottom: 16px; white-space: nowrap; }
-  .site-tagline { font-size: 1rem; line-height: 1.55; color: var(--text-muted); margin-bottom: 28px; max-width: 380px; }
-  .header-links { display: flex; gap: 24px; align-items: center; }
+  .site-tagline { font-size: 1rem; line-height: 1.55; color: var(--text-muted); margin-bottom: 28px; max-width: 430px; }
+  .header-links { display: flex; gap: 20px; align-items: center; }
   .header-links a { font-family: var(--font-body); font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
   .header-links a:hover { color: var(--green); }
-  .header-links .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-dim); }
+  .header-links .dot { width: 3px; min-width: 3px; height: 3px; flex: 0 0 3px; border-radius: 50%; background: var(--text-dim); }
 
   .hero-visual { position: absolute; right: -190px; top: -28px; width: 760px; height: 430px; cursor: pointer; perspective: 1200px; transition: transform 0.08s linear; }
   .hero-visual:focus-visible { outline: 1px solid var(--green-border); outline-offset: 8px; }
@@ -108,16 +109,18 @@
   .section-block:last-child { border-bottom: none; padding-bottom: 0; }
 
   .section-label { font-family: var(--font-body); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
-  .section-kicker { font-size: 0.98rem; font-weight: 400; line-height: 1.5; color: var(--text-dim); margin-top: 12px; max-width: 180px; }
 
-  .about-body { max-width: 760px; }
+  .about-section { display: block; }
+  .about-section .section-label,
+  .news-section .section-label { font-family: var(--font-display); font-size: clamp(2.05rem, 4vw, 3.15rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1; text-transform: none; color: var(--heading); margin-bottom: 38px; }
+  .about-body { width: 100%; max-width: none; }
   .about-body p { font-size: 1.08rem; font-weight: 400; line-height: 1.72; color: var(--text); margin-bottom: 18px; }
   .about-body p:last-child { margin-bottom: 0; }
-  .theme-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-  .theme-chip { border: 1px solid var(--green-edge); color: var(--green-dim); background: var(--green-faint); padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; letter-spacing: 0.04em; }
+  .about-body a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--green-border); transition: color 0.2s, border-color 0.2s; }
+  .about-body a:hover { color: var(--green-hover); border-color: var(--green-hover); }
 
-
-  .news-list { display: flex; flex-direction: column; gap: 0; max-width: 860px; }
+  .news-section { display: block; }
+  .news-list { display: flex; flex-direction: column; gap: 0; width: 100%; }
   .news-item { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 0 28px; padding: 20px 0; border-bottom: 1px solid var(--green-edge); }
   .news-item:first-child { padding-top: 0; }
   .news-item:last-child { border-bottom: none; padding-bottom: 0; }
@@ -127,22 +130,6 @@
   .news-text a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--green-border); transition: color 0.2s, border-color 0.2s; }
   .news-text a:hover { color: var(--green-hover); border-color: var(--green-hover); }
 
-  .pub-list { display: flex; flex-direction: column; gap: 0; }
-  .pub-item { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 0 32px; padding: 34px 0; border-bottom: 1px solid var(--green-edge); }
-  .pub-item:first-child { padding-top: 0; }
-  .pub-item:last-child { border-bottom: none; }
-  .pub-side { padding-top: 4px; }
-  .pub-year { font-family: var(--font-body); font-size: calc(0.82rem + 1px); color: var(--text-dim); display: block; margin-bottom: 3px; }
-  .pub-venue { font-family: var(--font-body); font-size: calc(0.78rem + 1px); color: var(--green-dim); font-style: italic; display: block; line-height: 1.4; }
-  .pub-authors { font-size: calc(0.82rem + 1px); color: var(--text-dim); margin-bottom: 6px; letter-spacing: 0.02em; }
-  .pub-authors strong { color: var(--text-muted); font-weight: 500; }
-  .pub-title { font-family: var(--font-display); font-size: calc(1.3rem + 1px); font-weight: 600; line-height: 1.3; color: var(--heading); display: block; margin-bottom: 12px; }
-  .pub-desc { font-size: calc(0.88rem + 1px); line-height: 1.65; color: var(--text-muted); margin-bottom: 14px; }
-  .pub-desc strong { color: var(--text); font-weight: 600; }
-  .pub-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-  .pub-link { font-size: calc(0.72rem + 1px); letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); text-decoration: none; border-bottom: 1px solid var(--green-border); padding-bottom: 1px; transition: border-color 0.2s, color 0.2s; }
-  .pub-link:hover { color: var(--green-hover); border-color: var(--green-hover); }
-
   footer { border-top: 1px solid var(--green-edge); padding: 28px 0; text-align: center; position: relative; z-index: 1; }
   footer p { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--text-dim); font-family: var(--font-body); }
   footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
@@ -150,16 +137,17 @@
 
   @media (max-width: 768px) {
     .container { padding: 0 24px; }
-    .navbar-inner { padding: 0 24px; }
-    .navbar-links { gap: 16px; }
+    .navbar-inner { padding: 0 16px; }
+    .navbar-name, .navbar-links a { font-size: 0.68rem; letter-spacing: 0.1em; }
+    .navbar-links { gap: 10px; }
     header { grid-template-columns: 1fr; min-height: auto; padding-top: 40px; }
     .header-links { flex-wrap: wrap; row-gap: 14px; }
     .hero-visual { position: relative; right: auto; top: auto; width: 100%; max-width: 280px; height: 250px; margin: 32px auto 0; display: block; }
     .hero-image--portrait { width: 154px; height: 154px; }
     .content-stack { padding-top: 52px; }
     .section-block { grid-template-columns: 1fr; gap: 24px; padding: 42px 0; }
-    .section-kicker { max-width: none; }
-    .pub-item { grid-template-columns: 64px 1fr; gap: 0 18px; }
+    .about-section .section-label,
+    .news-section .section-label { margin-bottom: 30px; }
     .news-item { grid-template-columns: 1fr; gap: 4px; }
   }
 </style>
@@ -187,7 +175,7 @@
         Open to PhD · Fall 2027
       </div>
       <h1 class="site-name">Satwik Pandey</h1>
-      <p class="site-tagline">Research Collaborator @ MBZUAI | AI Research Engineer @ VFS Global</p>
+      <p class="site-tagline">Independent Researcher | AI Research Engineer @ VFS Global</p>
       <nav class="header-links">
         <a href="mailto:psatwik2711@gmail.com">Email</a>
         <div class="dot"></div>
@@ -196,37 +184,32 @@
         <a href="https://github.com/satwik2711" target="_blank" rel="noopener">GitHub</a>
         <div class="dot"></div>
         <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&authuser=2&user=28p0C3wAAAAJ" target="_blank" rel="noopener">Scholar</a>
+        <div class="dot"></div>
+        <a href="https://linkedin.com/in/satwik-pandey" target="_blank" rel="noopener">LinkedIn</a>
       </nav>
     </div>
 
-    <figure class="hero-visual" id="heroVisual" role="button" tabindex="0" aria-label="Flip hero image" aria-pressed="false">
-      <img class="hero-image hero-image--tri" src="tri-green.png" alt="Green pixel-art triangles containing a mountain, forest and lake" onerror="this.style.display='none'" />
+    <figure class="hero-visual" id="heroVisual" role="button" tabindex="0" aria-label="Switch between portrait and triangle artwork" aria-pressed="false">
+      <img class="hero-image hero-image--tri" src="tri-green.png" alt="Green pixel-art triangles containing a mountain, forest, and lake" onerror="this.style.display='none'" />
       <img class="hero-image hero-image--portrait" src="resume-img.jpg" alt="Satwik Pandey" onerror="this.style.display='none'" />
     </figure>
   </header>
 
   <main class="content-stack">
     <section class="section-block about-section">
-      <div>
-        <p class="section-label">About</p>
-      </div>
+      <h2 class="section-label">About</h2>
       <div class="about-body">
-        <p>Hi, I’m Satwik. I’m an AI Research Engineer at VFS Global and a Research Collaborator with Kang Lab at MBZUAI, working on the reliability, reasoning, and interpretability of language models.</p>
-        <p>At VFS Global, I work on production document intelligence for multi-country visa processing. I build extraction and verification systems for real document workflows, including multimodal validation, confidence-aware routing, and checks around model outputs. These systems sit in workflows that process 4M+ documents daily.</p>
-        <p>My research is on reasoning and agentic systems, with a focus on making them safe, reliable, and uncertainty-aware. Much of that comes down to calibration and failure detection, and to whether these systems hold up once they're deployed rather than just benchmarked.</p>
-        <p>At Kang Lab, I study whether self-verification language in reasoning models reflects the causal computation needed to improve correctness and calibration. Previously, I worked on trustworthy reasoning for LLMs at UCSC’s AIEA Lab.</p>
+        <p>Hi, I’m Satwik. I’m an independent researcher working on the safety and reliability of reasoning and agentic systems.</p>
+        <p><a href="publications.html">My work</a> spans uncertainty quantification, multimodal failure modes, reasoning and agentic evaluation, and interpretability, with a recurring focus on understanding when models fail and how those failures can be detected or audited. I’m drawn to the space between academic research and deployment, methods that hold up outside a benchmark and can actually be run on a system someone depends on. My research has appeared at ICML 2026 and COLM 2026 workshops.</p>
+        <p>By day, I’m an AI Research Engineer at <a href="https://www.vfsglobal.com/en/general/about.html?from_section=0" target="_blank" rel="noopener">VFS Global</a>, where I work on production LLM/VLM systems for document intelligence, confidence-aware routing, and multimodal verification, serving 110+ countries at over 4M calls a day.</p>
+        <p>More recently, I’ve been moving deeper into mechanistic interpretability, with a <a href="https://www.alignmentforum.org/posts/StENzDcD3kpfGJssR/a-pragmatic-vision-for-interpretability" target="_blank" rel="noopener">pragmatic</a> and <a href="https://actionable-interpretability-guide.github.io/paper.pdf" target="_blank" rel="noopener">actionable</a> bent: I’m most interested in cases where understanding model internals helps answer a concrete safety question or enables a better audit, intervention, or decision. In particular, I’m interested in model forensics, memorization and unlearning, faithfulness, and chain-of-thought monitorability.</p>
+        <p>Always happy to talk research, interpretability, or reliability. Feel free to reach out over <a href="mailto:psatwik2711@gmail.com">email</a> or <a href="https://x.com/ergo_edge" target="_blank" rel="noopener">X</a>!</p>
       </div>
     </section>
 
     <section class="section-block news-section">
-      <div>
-        <p class="section-label">News</p>
-      </div>
+      <h2 class="section-label">News</h2>
       <div class="news-list">
-        <div class="news-item">
-          <div class="news-date">Sep 2026</div>
-          <p class="news-text"><a href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener">Don’t Blink</a> was accepted at the <strong>Actionable Interpretability Workshop (AIW)</strong> and the <strong>Scientific Understanding of Foundation Models Workshop (SCI-FM)</strong> at COLM 2026.</p>
-        </div>
         <div class="news-item">
           <div class="news-date">Aug 2026</div>
           <p class="news-text">New preprint: <a href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</a>.</p>
@@ -234,6 +217,14 @@
         <div class="news-item">
           <div class="news-date">Aug 2026</div>
           <p class="news-text">Joined <strong>Kang Lab at MBZUAI</strong> as a Research Collaborator, advised by Prof. Jian Kang.</p>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Jul 2026</div>
+          <p class="news-text">Attended <strong>ICML 2026</strong> in Seoul, South Korea, including the CTB and FAGEN workshops where our work was accepted.</p>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Jul 2026</div>
+          <p class="news-text"><a href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener">Don’t Blink</a> was accepted at the <strong>Actionable Interpretability Workshop (AIW)</strong> and the <strong>Scientific Understanding of Foundation Models Workshop (SCI-FM)</strong> at COLM 2026.</p>
         </div>
         <div class="news-item">
           <div class="news-date">May 2026</div>
@@ -262,90 +253,6 @@
       </div>
     </section>
 
-    <section class="section-block publications-section">
-      <div>
-        <p class="section-label">Publications &amp; Preprints</p>
-      </div>
-
-      <div class="pub-list">
-        <article class="pub-item">
-          <div class="pub-side">
-            <span class="pub-year">Preprint</span>
-            <span class="pub-venue">arXiv 2026</span>
-          </div>
-          <div class="pub-body">
-            <p class="pub-authors">S. Pandey*, <strong>S. Pandey*</strong>, S. Raghu</p>
-            <span class="pub-title">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</span>
-            <p class="pub-desc">We audit a deployed on-device language model, finding confident failures that user-visible signals cannot reliably detect while a black-box consistency wrapper substantially recovers reliability.</p>
-            <div class="pub-links">
-              <a class="pub-link" href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">arXiv 2026</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="pub-item">
-          <div class="pub-side">
-            <span class="pub-year">Preprint</span>
-            <span class="pub-venue">ICML '26<br>CTB · FAGEN</span>
-          </div>
-          <div class="pub-body">
-            <p class="pub-authors">S. Raghu*, <strong>S. Pandey*</strong>, S. Pandey</p>
-            <span class="pub-title">Proper Scoring Rules for Agentic Uncertainty Quantification</span>
-            <p class="pub-desc">Introduced a family of <strong>strictly proper</strong> trajectory-level scoring rules for evaluating uncertainty in LM agents, with a censored-trace extension and negative results showing that standard trajectory-level calibration metrics are not strictly proper in the agentic setting.</p>
-            <div class="pub-links">
-              <a class="pub-link" href="https://arxiv.org/abs/2605.24756" target="_blank" rel="noopener">arXiv 2026</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="pub-item">
-          <div class="pub-side">
-            <span class="pub-year">Preprint</span>
-            <span class="pub-venue">ICML '26<br>FAGEN</span>
-          </div>
-          <div class="pub-body">
-            <p class="pub-authors"><strong>S. Pandey*</strong>, S. Raghu*, S. Pandey</p>
-            <span class="pub-title">SELFDOUBT: Uncertainty Quantification for Reasoning LLMs via the Hedge-to-Verify Ratio</span>
-            <p class="pub-desc">Proposed an O(1) black-box uncertainty framework that extracts behavioral hedge/verify signals from reasoning traces, significantly outperforming Semantic Entropy on discrimination (<i>p</i>=0.001) at 10× lower cost; a zero-hedge gate achieves 96.1% precision across 7 models and 3 benchmarks.</p>
-            <div class="pub-links">
-              <a class="pub-link" href="https://arxiv.org/abs/2604.06389" target="_blank" rel="noopener">arXiv 2026</a>
-              <a class="pub-link" href="https://github.com/satwik2711/SelfDoubt" target="_blank" rel="noopener">Code</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="pub-item">
-          <div class="pub-side">
-            <span class="pub-year">Preprint</span>
-            <span class="pub-venue">COLM '26<br>AIW · SCI-FM</span>
-          </div>
-          <div class="pub-body">
-            <p class="pub-authors">S. Raghu*, <strong>S. Pandey*</strong></p>
-            <span class="pub-title">Don't Blink: Evidence Collapse during Multimodal Reasoning</span>
-            <p class="pub-desc">Identified a universal evidence collapse phenomenon in reasoning VLMs, observing visual attention drops up to 90.8% during generation and a task-conditional failure regime where confident but visually disengaged predictions are hazardous on sustained visual reference tasks but benign on symbolic tasks.</p>
-            <div class="pub-links">
-              <a class="pub-link" href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener">arXiv 2026</a>
-              <a class="pub-link" href="https://github.com/satwik2711/Dont-Blink" target="_blank" rel="noopener">Code</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="pub-item">
-          <div class="pub-side">
-            <span class="pub-year">Under Review</span>
-            <span class="pub-venue">JSS</span>
-          </div>
-          <div class="pub-body">
-            <p class="pub-authors"><strong>S. Pandey</strong>, et al.</p>
-            <span class="pub-title">Repair of Thought: Advancing Automated Program Repair through a Dual-Model Reasoning Framework</span>
-            <p class="pub-desc">Introduced a function-level APR framework achieving a SOTA 83.1% plausible repair rate on Defects4J, with an automated verification pipeline combining AST alignment, control-flow symbolic analysis, and semantic checks.</p>
-            <div class="pub-links">
-              <a class="pub-link" href="https://github.com/satwik2711/Repair-Of-Thought" target="_blank" rel="noopener">Code</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
   </main>
 </div>
 
