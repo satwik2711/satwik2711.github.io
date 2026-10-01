@@ -117,7 +117,6 @@
     <div class="navbar-links">
       <a href="index.html">Home</a><span class="nav-dot"></span>
       <a href="publications.html">Publications</a><span class="nav-dot"></span>
-      <a href="triangles.html" class="active" aria-current="page">Triangles</a><span class="nav-dot"></span>
       <a href="cv.html">CV</a>
     </div>
   </div>
@@ -499,7 +498,7 @@
   const ctx = canvas.getContext('2d');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const state = { scene: 'valley', palette: 'moss', ground: 'white', seed: 7 };
+  const state = { scene: 'valley', palette: 'blush', ground: 'night', seed: 7 };
   const [scene, palette, ground, seed] = location.hash.slice(1).split('.');
   if (SCENES[scene]) state.scene = scene;
   if (PALETTES[palette]) state.palette = palette;
@@ -734,8 +733,8 @@
   document.getElementById('resetParams').addEventListener('click', () => {
     Object.assign(params, DEFAULTS);
     ({ mask, edges } = buildMask(params.gap));
-    if (state.palette === 'custom') state.palette = 'moss';
-    if (state.ground === 'custom') state.ground = 'white';
+    if (state.palette === 'custom') state.palette = 'blush';
+    if (state.ground === 'custom') state.ground = 'night';
     resize();
     rebuild();
   });
