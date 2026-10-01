@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Triangles · Satwik Pandey</title>
+
+<link rel="icon" type="image/svg+xml" href="favicon-animated.svg">
+<link rel="shortcut icon" href="artifacts/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="32x32" href="artifacts/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="artifacts/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="artifacts/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="artifacts/favicons/favicon-512.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f8f4ea;
+    --text: #2f3a2d;
+    --muted: #596754;
+    --dim: #8c8d74;
+    --green: #3f8f56;
+    --green-edge: rgba(63, 143, 86, .20);
+    --green-border: rgba(63, 143, 86, .45);
+    --heading: #1e2f23;
+    --ground: #ffffff;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Source Serif 4', Georgia, serif;
+  }
+  html { font-size: 18px; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; overflow-x: hidden; font-family: var(--font-body); }
+  .container { width: min(1100px, calc(100% - 96px)); margin: 0 auto; }
+  .navbar { border-bottom: 1px solid var(--green-edge); }
+  .navbar-inner { width: min(1100px, calc(100% - 96px)); min-height: 52px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .navbar-name, .navbar-links a { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s ease; white-space: nowrap; }
+  .navbar-name:hover, .navbar-links a:hover, .navbar-links a.active { color: var(--green); }
+  .navbar-links { display: flex; align-items: center; gap: 24px; }
+  .nav-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--dim); flex: 0 0 3px; }
+
+  main { padding: 56px 0 88px; }
+
+
+  .studio { display: flex; flex-direction: column; gap: 32px; }
+  .stage { position: relative; overflow: hidden; aspect-ratio: 16 / 10; min-height: 300px; background: var(--ground); border: 1px solid var(--green-edge); transition: background-color .35s ease; }
+  .stage canvas { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); image-rendering: pixelated; image-rendering: crisp-edges; }
+  .stage noscript img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+  .controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 18px 40px; padding-top: 20px; }
+  .controls > :nth-child(even) { justify-self: end; }
+  .control-group { display: flex; flex-direction: column; gap: 9px; }
+  .control-label { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .actions { display: flex; gap: 8px; }
+  button { appearance: none; border: 1px solid var(--green-edge); padding: 7px 12px; background: transparent; color: var(--muted); font-family: var(--font-body); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: border-color .2s ease, background .2s ease, color .2s ease; }
+  button:hover { border-color: var(--green-border); color: var(--green); }
+  button[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: #f8f4ea; }
+  .actions button { border-color: var(--green-border); color: var(--heading); }
+  .actions button:hover { background: var(--heading); border-color: var(--heading); color: #f8f4ea; }
+  .actions button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #f8f4ea; }
+  .knob:has(input:disabled) { opacity: .4; }
+  button:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+  .swatch { display: inline-block; width: 9px; height: 9px; margin-right: 7px; vertical-align: -1px; border: 1px solid rgba(0, 0, 0, .15); }
+
+  .panel { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr) minmax(0, 1fr); gap: 20px 32px; padding: 20px 22px 24px; border: 1px solid var(--green-edge); background: #fbf8f0; }
+  .panel-head { grid-column: 1 / -1; }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .panel-head span::before { content: '∆'; margin-right: 9px; color: var(--green); }
+  .panel-head button { padding: 4px 9px; font-size: .64rem; }
+  .knobs { display: flex; flex-direction: column; gap: 13px; }
+  .knob { display: grid; grid-template-columns: 76px minmax(0, 1fr) 36px; align-items: center; gap: 10px; font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  .knob output { font-variant-numeric: tabular-nums; letter-spacing: 0; text-align: right; color: var(--muted); }
+  .knob input[type="range"] { width: 100%; accent-color: var(--green); }
+  .knob input[type="number"] { width: 100%; padding: 5px 8px; border: 1px solid var(--green-edge); background: #fffdf8; color: var(--text); font: inherit; letter-spacing: 0; }
+  .swatches { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; grid-column: 2 / 4; }
+  .knob input[type="color"] { width: 100%; height: 24px; padding: 0; border: 1px solid var(--green-edge); background: none; cursor: pointer; }
+  .knob input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+  .knob input[type="color"]::-webkit-color-swatch { border: none; }
+  .knob-ground { grid-template-columns: 76px 40px; }
+  .code { display: flex; flex-direction: column; min-width: 0; }
+  .code-head { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  .code-head span { margin-right: auto; }
+  .code-head button { padding: 4px 8px; font-size: .62rem; }
+  .code textarea, .code pre { width: 100%; padding: 10px 12px; border: 1px solid var(--green-edge); background: #fffdf8; color: var(--heading); font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: .64rem; line-height: 1.55; tab-size: 2; }
+  .code textarea { height: 300px; resize: vertical; }
+  .code textarea:focus { outline: 1px solid var(--green-border); }
+  .code textarea.invalid { border-color: #c0614f; }
+  .code pre { height: 300px; overflow: auto; white-space: pre; }
+  footer { border-top: 1px solid var(--green-edge); padding: 28px 0; text-align: center; color: var(--dim); font-size: .78rem; letter-spacing: .08em; }
+
+  @media (max-width: 960px) {
+    .panel { grid-template-columns: 1fr; }
+    .controls { grid-template-columns: 1fr; }
+    .controls > :nth-child(even) { justify-self: start; }
+  }
+
+  @media (max-width: 760px) {
+    .container, .navbar-inner { width: min(100% - 40px, 1100px); }
+    .navbar-inner { min-height: 58px; }
+    .navbar-name, .navbar-links a { font-size: .66rem; letter-spacing: .09em; }
+    .navbar-links { gap: 10px; }
+    .nav-dot { display: none; }
+    main { padding-top: 28px; }
+    .stage { aspect-ratio: 4 / 3; min-height: 0; }
+        }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-name">∆ / ergoedge</a>
+    <div class="navbar-links">
+      <a href="index.html">Home</a><span class="nav-dot"></span>
+      <a href="publications.html">Publications</a><span class="nav-dot"></span>
+      <a href="triangles.html" class="active" aria-current="page">Triangles</a><span class="nav-dot"></span>
+      <a href="cv.html">CV</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="studio">
+    <div class="studio-art">
+      <div class="stage" id="stage" role="img" aria-label="Six pixel-art triangles, each a window cut into the same generated landscape.">
+        <canvas id="art"></canvas>
+        <noscript><img src="artifacts/images/tri-green.png" alt="Six pixel-art triangles showing a green forest valley."></noscript>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <span class="control-label">Scene</span>
+          <div class="chips" data-key="scene"></div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Ground</span>
+          <div class="chips" data-key="ground"></div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Palette</span>
+          <div class="chips" data-key="palette"></div>
+        </div>
+        <div class="actions">
+          <button id="reroll" type="button">Shuffle</button>
+          <button id="hd" type="button" aria-pressed="false" title="Smooth, high-resolution rendering">HD</button>
+          <button id="save" type="button">Steal</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="panel" aria-label="Playground">
+      <div class="panel-head"><span>Playground</span><button type="button" id="resetParams">Reset</button></div>
+      <div class="knobs">
+        <label class="knob"><span>Size</span><input type="range" min="40" max="95" step="1" data-param="size"><output></output></label>
+        <label class="knob"><span>Pixel</span><input type="range" min="1" max="4" step="1" data-param="pixel"><output></output></label>
+        <label class="knob"><span>Gap</span><input type="range" min="0" max="6" step=".2" data-param="gap"><output></output></label>
+        <label class="knob"><span>Scanlines</span><input type="range" min="0" max="20" step="1" data-param="scanlines"><output></output></label>
+        <label class="knob"><span>Depth</span><input type="range" min="0" max="16" step="1" data-param="depth"><output></output></label>
+        <label class="knob"><span>Seed</span><input type="number" min="1" max="99999" step="1" id="seedInput"></label>
+        <div class="knob"><span>Colours</span><div class="swatches" id="rampInputs"></div></div>
+        <label class="knob knob-ground"><span>Ground</span><input type="color" id="groundInput"></label>
+      </div>
+      <div class="code">
+        <div class="code-head"><span>settings.json</span><button type="button" id="applyConfig">Apply</button><button type="button" id="copyConfig">Copy</button></div>
+        <textarea id="config" wrap="off" spellcheck="false" aria-label="Settings as JSON"></textarea>
+      </div>
+      <div class="code">
+        <div class="code-head"><span id="sourceName">scene</span><button type="button" id="copySource">Copy</button></div>
+        <pre id="source"><code></code></pre>
+      </div>
+    </aside>
+  </div>
+
+</main>
+
+<footer>© 2026 Satwik Pandey</footer>
+
+<script>
+(() => {
+  // Composition grid: the reference layout at 4 reference-px per art pixel.
+  const CW = 185, CH = 139, M = 16, GW = CW + 2 * M, GH = CH + 2 * M;
+  const X0 = -M, X1 = CW + M, Y0 = -M, Y1 = CH + M;
+
+  // Six equilateral triangles, measured from the reference (x of left corner, flat-edge y, side, pointing up?).
+  const LAYOUT = [
+    [632, 533, 171, true],
+    [708, 342, 297, false],
+    [830, 675, 420, true],
+    [1127, 404, 198, false],
+    [1228, 597, 143, true],
+    [1020, 686, 205, false]
+  ];
+  const RISE = [Math.sqrt(3) / 2, .5], FALL = [Math.sqrt(3) / 2, -.5], DOWN = [0, 1];
+  const along = (tri, n) => tri.map(([x, y]) => x * n[0] + y * n[1]);
+  const slide = (tri, n, d) => tri.forEach(p => { p[0] += n[0] * d; p[1] += n[1] * d; });
+  const inside = (x, y, tri) => {
+    for (let k = 0; k < 3; k++) {
+      const [ax, ay] = tri[k], [bx, by] = tri[(k + 1) % 3], [cx, cy] = tri[(k + 2) % 3];
+      const side = ((bx - ax) * (cy - ay) - (by - ay) * (cx - ax)) > 0 ? 1 : -1;
+      if (side * ((bx - ax) * (y - ay) - (by - ay) * (x - ax)) < 0) return false;
+    }
+    return true;
+  };
+
+  // Keep the big triangle fixed and slide each neighbour along the normal of the edge they share,
+  // so every gap is exactly `gap` pixels wide, then recentre the whole arrangement.
+  const buildMask = gap => {
+    const tris = LAYOUT.map(([x, y, side, up]) => {
+      const h = side * Math.sqrt(3) / 2;
+      const pts = up
+        ? [[x, y], [x + side / 2, y - h], [x + side, y]]
+        : [[x, y], [x + side, y], [x + side / 2, y + h]];
+      return pts.map(([px, py]) => [(px - 632) / 4, (py - 311) / 4]);
+    });
+    const [T1, T2, T3, T4, T5, T6] = tris;
+    slide(T2, RISE, Math.min(...along(T3, RISE)) - gap - Math.max(...along(T2, RISE)));
+    slide(T1, FALL, Math.min(...along(T2, FALL)) - gap - Math.max(...along(T1, FALL)));
+    slide(T4, FALL, Math.max(...along(T3, FALL)) + gap - Math.min(...along(T4, FALL)));
+    slide(T5, RISE, Math.max(...along(T4, RISE)) + gap - Math.min(...along(T5, RISE)));
+    slide(T6, DOWN, Math.max(...along(T3, DOWN)) + gap - Math.min(...along(T6, DOWN)));
+    const all = tris.flat();
+    const shiftX = (CW - Math.max(...all.map(p => p[0])) - Math.min(...all.map(p => p[0]))) / 2;
+    const shiftY = (CH - Math.max(...all.map(p => p[1])) - Math.min(...all.map(p => p[1]))) / 2;
+    all.forEach(p => { p[0] += shiftX; p[1] += shiftY; });
+    const out = new Uint8Array(CW * CH);
+    for (let y = 0; y < CH; y++) for (let x = 0; x < CW; x++) out[y * CW + x] = tris.some(tri => inside(x + .5, y + .5, tri)) ? 1 : 0;
+    // Each edge as nx·x + ny·y + c, positive on the inside, for anti-aliased edges in smooth mode.
+    const edges = tris.map(tri => tri.map((a, k) => {
+      const b = tri[(k + 1) % 3], c = tri[(k + 2) % 3], len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      let nx = (a[1] - b[1]) / len, ny = (b[0] - a[0]) / len;
+      if (nx * (c[0] - a[0]) + ny * (c[1] - a[1]) < 0) { nx = -nx; ny = -ny; }
+      return [nx, ny, -(nx * a[0] + ny * a[1])];
+    }));
+    return { mask: out, edges };
+  };
+
+  // Noise and randomness.
+  const rng = seed => { let a = seed * 2654435761 >>> 0; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; };
+  const hash = (x, y, s) => { let h = Math.imul(x | 0, 374761393) + Math.imul(y | 0, 668265263) + Math.imul(s | 0, 1274126177); h = Math.imul(h ^ (h >>> 13), 1274126177); h ^= h >>> 16; return (h >>> 0) / 4294967296; };
+  const smooth = t => t * t * (3 - 2 * t);
+  const noise1 = (x, s) => { const i = Math.floor(x), f = smooth(x - i); return hash(i, 0, s) * (1 - f) + hash(i + 1, 0, s) * f; };
+  const fbm1 = (x, s) => noise1(x, s) * .57 + noise1(x * 2 + 17, s) * .29 + noise1(x * 4 + 31, s) * .14;
+  const noise2 = (x, y, s) => {
+    const i = Math.floor(x), j = Math.floor(y), fx = smooth(x - i), fy = smooth(y - j);
+    const a = hash(i, j, s) * (1 - fx) + hash(i + 1, j, s) * fx;
+    const b = hash(i, j + 1, s) * (1 - fx) + hash(i + 1, j + 1, s) * fx;
+    return a * (1 - fy) + b * fy;
+  };
+  const fbm2 = (x, y, s) => noise2(x, y, s) * .6 + noise2(x * 2.1, y * 2.1, s + 1) * .28 + noise2(x * 4.3, y * 4.3, s + 2) * .12;
+  const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  const bayer = (x, y) => (BAYER[(((y % 4) + 4) % 4) * 4 + (((x % 4) + 4) % 4)] + .5) / 16;
+  let hd = false;
+  const gradient = (x, y, stops) => {
+    if (y < stops[0][0]) return stops[0][1];
+    for (let k = 0; k < stops.length - 1; k++) {
+      const [y0, a] = stops[k], [y1, b] = stops[k + 1];
+      if (y < y1) return (y - y0) / (y1 - y0) > (hd ? .5 : bayer(x, y)) ? b : a;
+    }
+    return stops[stops.length - 1][1];
+  };
+
+  // Layers hold a shade index (0 lightest – 7 darkest); -1 is empty.
+  const layer = depth => ({ depth, buf: new Int16Array(GW * GH).fill(-1) });
+  const put = (L, x, y, v) => { x = Math.round(x) + M; y = Math.round(y) + M; if (x >= 0 && y >= 0 && x < GW && y < GH) L.buf[y * GW + x] = v; };
+  const each = (L, fn) => { for (let y = Y0; y < Y1; y++) for (let x = X0; x < X1; x++) { const v = fn(x, y); if (v >= 0) put(L, x, y, v); } };
+  const fillBelow = (L, ridge, shade) => { for (let x = X0; x < X1; x++) { const r = Math.ceil(ridge(x)); for (let y = Math.max(r, Y0); y < Y1; y++) put(L, x, y, typeof shade === 'function' ? shade(x, y, r) : shade); } };
+  const disc = (L, cx, cy, r, v) => { const n = Math.ceil(r); for (let dy = -n; dy <= n; dy++) for (let dx = -n; dx <= n; dx++) if (dx * dx + dy * dy <= r * r + .3) put(L, Math.round(cx) + dx, Math.round(cy) + dy, v); };
+  const pine = (L, tx, base, h, v) => {
+    const tiers = Math.max(2, Math.round(h / 7)), tier = h / tiers;
+    for (let d = 0; d <= h; d++) {
+      const half = Math.floor(d * .3 * (.5 + .5 * ((d % tier) / tier)));
+      for (let x = -half; x <= half; x++) put(L, tx + x, base - h + d, v);
+    }
+    for (let y = base; y < Y1; y++) put(L, tx, y, v);
+  };
+  const bird = (L, x, y, v) => { x = Math.round(x); y = Math.round(y); put(L, x - 1, y - 1, v); put(L, x, y, v); put(L, x + 1, y - 1, v); };
+  const line = (L, x0, y0, x1, y1, v) => {
+    const n = Math.max(1, Math.ceil(Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0))));
+    for (let i = 0; i <= n; i++) put(L, x0 + (x1 - x0) * i / n, y0 + (y1 - y0) * i / n, v);
+  };
+  const cellEdge = (x, y, size, s) => {
+    const gx = Math.floor(x / size), gy = Math.floor(y / size);
+    let f1 = Infinity, f2 = Infinity;
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+      const cx = gx + dx, cy = gy + dy;
+      const d = Math.hypot(x + .5 - (cx + hash(cx, cy, s)) * size, y + .5 - (cy + hash(cx, cy, s + 1)) * size);
+      if (d < f1) { f2 = f1; f1 = d; } else if (d < f2) f2 = d;
+    }
+    return f2 - f1;
+  };
+  const sample = (layers, x, y) => {
+    x = Math.max(X0, Math.min(X1 - 1, Math.round(x))) + M; y = Math.max(Y0, Math.min(Y1 - 1, Math.round(y))) + M;
+    for (const L of layers) { const v = L.buf[y * GW + x]; if (v >= 0) return v; }
+    return 0;
+  };
+  // Mirror everything above the waterline, one shade darker, with a little ripple and the odd glint.
+  const reflect = (above, WL, seed, depth) => {
+    const water = layer(depth);
+    for (let y = WL; y < Y1; y++) for (let x = X0; x < X1; x++) {
+      const ripple = Math.round(Math.sin(y * 1.7 + seed) * (y - WL) / 26);
+      const s = sample(above, x + ripple, 2 * WL - y - 1) & 7;
+      const glint = hash(Math.floor((x + y * 3) / 5), y, seed + 14) > .9 && y % 3 === 0;
+      put(water, x, y, glint ? 1 : Math.min(7, s + 1));
+    }
+    return water;
+  };
+
+  const SCENES = {
+    valley: { label: 'Valley', build(seed) {
+      const r = rng(seed);
+      const sky = layer(.03), sun = layer(.08), birds = layer(.12), clouds = layer(.15), far = layer(.22), mid = layer(.34), river = layer(.4), hills = layer(.5), back = layer(.68), front = layer(1);
+      each(sky, (x, y) => gradient(x, y, [[17, 2], [22, 1]]));
+      const sunX = 98 + r() * 16, sunY = 42 + r() * 6, sunR = 10 + r() * 3;
+      disc(sun, sunX, sunY, sunR, 0);
+      for (let x = X0; x < X1; x++) {
+        const n = fbm1(x * .045, seed + 1);
+        if (n < .44) continue;
+        const top = Math.round(sunY + 3 - 7 * fbm1(x * .09, seed + 2)), depth = Math.round(2 + (n - .44) * 22);
+        for (let y = top; y < top + depth; y++) put(clouds, x, y, y < top + 2 ? 0 : 1);
+      }
+      const farRidge = x => 50 + 26 * (fbm1(x * .035, seed + 3) - .5);
+      const midRidge = x => 63 + 30 * (fbm1(x * .03, seed + 4) - .5);
+      const hillRidge = x => 79 + 20 * (fbm1(x * .045, seed + 5) - .5);
+      fillBelow(far, farRidge, 2);
+      fillBelow(mid, midRidge, 3);
+      const riverPhase = r() * 6;
+      for (let x = 70 + Math.floor(r() * 20); x < 160; x++) {
+        const y = Math.round(80 + 5 * Math.sin(x * .09 + riverPhase) + (x - 100) * .08);
+        if (y > midRidge(x) + 2 && hash(x, 0, seed + 6) > .22) { put(river, x, y, 1); if (hash(x, 1, seed) > .5) put(river, x, y + 1, 0); }
+      }
+      fillBelow(hills, hillRidge, 4);
+      const backGround = x => 90 + 8 * (fbm1(x * .05, seed + 7) - .5);
+      fillBelow(back, backGround, 5);
+      for (let x = X0; x < X1; x += 2 + Math.floor(r() * 3)) pine(back, x, Math.round(backGround(x)) + 3, 9 + Math.floor(r() * 18), 5);
+      fillBelow(front, () => 128, 6);
+      for (let x = X0; x < X1; x += 4 + Math.floor(r() * 8)) pine(front, x, 128 + Math.floor(r() * 12), 24 + Math.floor(r() * 42), r() < .5 ? 6 : 7);
+      const flock = 4 + Math.floor(r() * 4);
+      for (let k = 0; k < flock; k++) bird(birds, sunX + 6 + r() * 42, sunY - 18 + r() * 22, 6);
+      return [front, back, hills, river, mid, far, clouds, birds, sun, sky];
+    }},
+
+    summit: { label: 'Summit', build(seed) {
+      const r = rng(seed);
+      const sky = layer(.03), stars = layer(.05), moon = layer(.08), far = layer(.22), near = layer(.45), trees = layer(.7);
+      const WL = 104;
+      each(sky, (x, y) => gradient(x, y, [[10, 3], [15, 2], [42, 2], [47, 1]]));
+      for (let k = 0; k < 40; k++) put(stars, X0 + r() * (X1 - X0), Y0 + r() * 56, r() < .7 ? 1 : 0);
+      const mx = 30 + r() * 120, my = 16 + r() * 16;
+      disc(moon, mx, my, 6, 0);
+      disc(moon, mx + 3, my - 2, 5, -1);
+      const peaks = (count, top, spread) => Array.from({ length: count }, (_, i) => ({ x: X0 + (i + .5) * (X1 - X0) / count + (r() - .5) * 14, y: top + r() * spread }));
+      const range = (L, list, slope, lit, shadow, snowLit, snowShadow, snow, salt) => {
+        for (let x = X0; x < X1; x++) {
+          let best = Infinity, peak = null;
+          for (const p of list) { const ry = p.y + Math.abs(x - p.x) * slope; if (ry < best) { best = ry; peak = p; } }
+          const top = Math.ceil(best + (noise1(x * .5, seed + salt) - .5) * 2);
+          const line = peak.y + snow + Math.floor(hash(x, 3, seed + salt) * 4);
+          for (let y = top; y < Y1; y++) {
+            const sunward = x < peak.x;
+            put(L, x, y, y < line ? (sunward ? snowLit : snowShadow) : (sunward ? lit : shadow));
+          }
+        }
+      };
+      range(far, peaks(7, 28, 24), 1.05, 3, 4, 0, 1, 7, 11);
+      range(near, peaks(4, 56, 18), .82, 5, 6, 2, 3, 5, 12);
+      const ground = x => 97 + 4 * (fbm1(x * .06, seed + 13) - .5);
+      for (let x = X0; x < X1; x++) for (let y = Math.ceil(ground(x)); y < WL; y++) put(trees, x, y, 6);
+      for (let x = X0; x < X1; x += 2 + Math.floor(r() * 3)) {
+        const h = 4 + Math.floor(r() * 7), base = Math.round(ground(x)) + 2;
+        const tiers = Math.max(2, Math.round(h / 3)), tier = h / tiers;
+        for (let d = 0; d <= h; d++) { const half = Math.floor(d * .35 * (.5 + .5 * ((d % tier) / tier))); for (let dx = -half; dx <= half; dx++) put(trees, x + dx, base - h + d, 7); }
+      }
+      const above = [trees, near, far, moon, stars, sky];
+      return [reflect(above, WL, seed, .75), ...above];
+    }},
+
+    city: { label: 'City', build(seed) {
+      const r = rng(seed);
+      const sky = layer(.03), stars = layer(.05), moon = layer(.08), far = layer(.25), mid = layer(.5), near = layer(.8);
+      each(sky, (x, y) => gradient(x, y, [[8, 6], [13, 5], [44, 5], [50, 4]]));
+      for (let k = 0; k < 45; k++) put(stars, X0 + r() * (X1 - X0), Y0 + r() * 70, r() < .75 ? 3 : 2);
+      disc(moon, 20 + r() * 140, 12 + r() * 14, 4.5, 1);
+      const tower = (L, x, w, top, body, lit, s) => {
+        const style = hash(x, top, s);
+        if (style < .2) {
+          const h = Math.ceil(w * .9);
+          for (let d = 0; d < h; d++) { const half = Math.floor(d * (w / 2) / h); for (let dx = -half; dx <= half; dx++) put(L, x + Math.floor(w / 2) + dx, top - h + d, body); }
+        } else if (style < .45) {
+          for (let y = top - 4; y < top; y++) for (let dx = 2; dx < w - 2; dx++) put(L, x + dx, y, body);
+          if (style < .32) for (let y = top - 11; y < top - 4; y++) put(L, x + Math.floor(w / 2), y, body);
+        }
+        for (let y = top; y < Y1; y++) for (let dx = 0; dx < w; dx++) {
+          const pane = dx > 0 && dx < w - 1 && dx % 2 === 1 && (y - top) % 3 === 1;
+          put(L, x + dx, y, pane && hash(x + dx, y, s) < lit ? lit > .3 && hash(x + dx, y, s + 1) < .4 ? 0 : 1 : body);
+        }
+      };
+      const row = (L, minTop, maxTop, minW, maxW, body, lit, s) => {
+        for (let x = X0; x < X1;) {
+          const w = minW + Math.floor(r() * (maxW - minW));
+          tower(L, x, w, minTop + Math.floor(r() * (maxTop - minTop)), body, lit, s);
+          x += w + (r() < .3 ? 1 : 0);
+        }
+      };
+      row(far, 28, 66, 5, 10, 3, .2, seed + 1);
+      row(mid, 44, 84, 7, 13, 5, .25, seed + 2);
+      row(near, 72, 112, 9, 17, 7, .4, seed + 3);
+      return [near, mid, far, moon, stars, sky];
+    }},
+
+    bridge: { label: 'Bridge', build(seed) {
+      const r = rng(seed);
+      const sky = layer(.03), sun = layer(.08), birds = layer(.12), clouds = layer(.15), hills = layer(.25), shore = layer(.4), truss = layer(.6);
+      const WL = 96, deck = 80;
+      each(sky, (x, y) => gradient(x, y, [[18, 2], [24, 1]]));
+      const sunX = 60 + r() * 70, sunY = 50 + r() * 8;
+      disc(sun, sunX, sunY, 11, 0);
+      for (let x = X0; x < X1; x++) {
+        const n = fbm1(x * .045, seed + 1);
+        if (n < .46) continue;
+        const top = Math.round(34 - 8 * fbm1(x * .09, seed + 2)), depth = Math.round(2 + (n - .46) * 18);
+        for (let y = top; y < top + depth; y++) put(clouds, x, y, y < top + 2 ? 0 : 1);
+      }
+      fillBelow(hills, x => 70 + 18 * (fbm1(x * .03, seed + 3) - .5), 3);
+      const bank = x => 88 + 5 * (fbm1(x * .05, seed + 4) - .5);
+      fillBelow(shore, bank, 4);
+      for (let x = X0; x < X1; x += 2 + Math.floor(r() * 3)) pine(shore, x, Math.round(bank(x)) + 2, 4 + Math.floor(r() * 7), 5);
+      for (let y = deck; y < deck + 2; y++) for (let x = X0; x < X1; x++) put(truss, x, y, 6);
+      const span = 54 + Math.floor(r() * 14), panels = 6;
+      for (let start = X0 - Math.floor(r() * span); start < X1; start += span) {
+        const nodeX = i => start + i * span / panels;
+        const topAt = t => deck - 7 - 9 * Math.sin(Math.PI * t);
+        for (let i = 0; i < panels; i++) {
+          const tx = start + (i + .5) * span / panels, ty = topAt((i + .5) / panels);
+          line(truss, nodeX(i), deck, tx, ty, 6);
+          line(truss, tx, ty, nodeX(i + 1), deck, 6);
+          if (i < panels - 1) line(truss, tx, ty, start + (i + 1.5) * span / panels, topAt((i + 1.5) / panels), 6);
+        }
+        for (let y = deck + 2; y < WL; y++) for (let dx = -1; dx <= 1; dx++) put(truss, start + dx, y, 7);
+      }
+      const flock = 3 + Math.floor(r() * 4);
+      for (let k = 0; k < flock; k++) bird(birds, sunX - 30 + r() * 60, 20 + r() * 22, 6);
+      const above = [truss, shore, hills, clouds, birds, sun, sky];
+      return [reflect(above, WL, seed, .7), ...above];
+    }},
+
+    delta: { label: 'Delta', build(seed) {
+      const r = rng(seed);
+      const ground = layer(.15), rivers = layer(.4);
+      each(ground, (x, y) => {
+        const n = fbm2(x * .025, y * .025, seed + 20);
+        const v = n < .42 ? 2 : n < .6 ? 1 : 0;
+        return cellEdge(x, y, 22, seed + 21) < .7 ? v + 1 : v;
+      });
+      const points = [];
+      const walk = (x, y, angle, width, length, generation) => {
+        const heading = angle;
+        for (let i = 0; i < length; i++) {
+          angle += (r() - .5) * .2 + (heading - angle) * .05;
+          x += Math.cos(angle); y += Math.sin(angle);
+          if (x < X0 - 4 || x > X1 + 4 || y < Y0 - 4 || y > Y1 + 4) return;
+          points.push([x, y, width]);
+          if (generation < 1 && r() < .015) {
+            const side = r() < .5 ? -1 : 1;
+            walk(x, y, angle + side * (.5 + r() * .5), Math.max(.4, width * .6), Math.floor(length * .3 + r() * 25), generation + 1);
+          }
+        }
+      };
+      const channels = 3;
+      for (let k = 0; k < channels; k++) walk(X0 + (k + .5) * (X1 - X0) / channels + (r() - .5) * 20, Y0, Math.PI / 2 + (r() - .5) * .5, 1 + r() * .6, 400, 0);
+      for (const [x, y, w] of points) if (w >= .9) disc(rivers, x, y, w + 1, 3);
+      for (const [x, y, w] of points) if (w >= .9) disc(rivers, x, y, w, 4); else put(rivers, x, y, 3);
+      return [rivers, ground];
+    }}
+  };
+
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const ramp = list => list.split(' ').map(hex);
+  const MOSS = ramp('#eef2df #d3e3bf #b3d09f #8dbb85 #66a06c #457f55 #2c6040 #173f2b');
+  const PALETTES = {
+    moss: { label: 'Moss', ramp: MOSS },
+    blush: { label: 'Blush', ramp: ramp('#fff1e8 #fcd6cc #f3bcbc #c9a3c8 #9b8fc4 #6f67a4 #4b457c #2d2a48') },
+    tide: { label: 'Tide', ramp: ramp('#e6f3f1 #c2e2e1 #96c9cc #6aa9b3 #488a9c #306b82 #1f4d65 #112f45') },
+    sand: { label: 'Sand', ramp: ramp('#faf2e3 #f0ddbf #e2c59a #cfaa7c #b08b62 #8a6c4d #634f3a #3e3226') },
+    midnight: { label: 'Midnight', ramp: ramp('#f6e6b4 #c9cde6 #9aa3cf #6f7ab4 #4d5896 #373f78 #262c5a #171b3b') },
+    ink: { label: 'Ink', ramp: ramp('#f3f2ee #d9d8d2 #b7b6ae #929189 #6d6c66 #4c4b47 #302f2c #181816') }
+  };
+  const GROUNDS = {
+    white: { label: 'White', hex: '#ffffff' },
+    cream: { label: 'Cream', hex: '#f8f4ea' },
+    night: { label: 'Night', hex: '#0f1714' }
+  };
+
+  const stage = document.getElementById('stage');
+  const canvas = document.getElementById('art');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const state = { scene: 'valley', palette: 'moss', ground: 'white', seed: 7 };
+  const [scene, palette, ground, seed] = location.hash.slice(1).split('.');
+  if (SCENES[scene]) state.scene = scene;
+  if (PALETTES[palette]) state.palette = palette;
+  if (GROUNDS[ground]) state.ground = ground;
+  if (/^\d+$/.test(seed || '')) state.seed = Number(seed);
+
+  const DEFAULTS = { size: 70, pixel: 1, gap: 2.2, scanlines: 6, depth: 6 };
+  const params = { ...DEFAULTS };
+  let { mask, edges } = buildMask(params.gap);
+  let res = 1;
+
+  let layers = [], artW = 0, artH = 0, offX = 0, offY = 0;
+  const tilt = { x: 0, y: 0, tx: 0, ty: 0 };
+  let lastKey = '';
+
+  const scan = (c, y) => { const f = 1 - params.scanlines / 100; return y & 1 ? [c[0] * f, c[1] * f, c[2] * f] : c; };
+  const colour = (v, y) => scan(PALETTES[state.palette].ramp[v & 7], y);
+
+  const render = (force) => {
+    if (!artW) return;
+    const shifts = layers.map(L => [Math.round(-tilt.x * L.depth * params.depth), Math.round(-tilt.y * L.depth * params.depth / 2)]);
+    const key = shifts.join('|');
+    if (!force && key === lastKey) return;
+    lastKey = key;
+    if (hd) return renderHD(shifts);
+    const img = ctx.createImageData(artW, artH), data = img.data;
+    const g = hex(GROUNDS[state.ground].hex);
+    for (let j = 0; j < artH; j++) for (let i = 0; i < artW; i++) {
+      const k = params.pixel, x = Math.floor((i - offX) / k) * k, y = Math.floor((j - offY) / k) * k, o = (j * artW + i) * 4;
+      let c = g;
+      if (x >= 0 && y >= 0 && x < CW && y < CH && mask[y * CW + x]) {
+        let v = 0;
+        for (let k = 0; k < layers.length; k++) {
+          const lv = layers[k].buf[(y + M + shifts[k][1]) * GW + x + M + shifts[k][0]];
+          if (lv >= 0) { v = lv; break; }
+        }
+        c = colour(v, j - offY);
+      }
+      data[o] = c[0]; data[o + 1] = c[1]; data[o + 2] = c[2]; data[o + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+  };
+
+  // HD: upscale the scene 4× with two passes of Scale2x (rounds off stair-steps without blurring),
+  // and anti-alias the triangle edges from their exact geometry.
+  const lookup = (x, y, shifts) => {
+    for (let k = 0; k < layers.length; k++) {
+      const gx = Math.max(0, Math.min(GW - 1, x + M + shifts[k][0])), gy = Math.max(0, Math.min(GH - 1, y + M + shifts[k][1]));
+      const lv = layers[k].buf[gy * GW + gx];
+      if (lv >= 0) return lv;
+    }
+    return 0;
+  };
+  const coverage = (x, y) => {
+    let best = -Infinity;
+    for (const tri of edges) {
+      const d = Math.min(tri[0][0] * x + tri[0][1] * y + tri[0][2], tri[1][0] * x + tri[1][1] * y + tri[1][2], tri[2][0] * x + tri[2][1] * y + tri[2][2]);
+      if (d > best) best = d;
+    }
+    return best;
+  };
+  const scale2x = (src, w, h) => {
+    const out = new Int8Array(w * h * 4), W = w * 2;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const P = src[y * w + x];
+      const A = y > 0 ? src[(y - 1) * w + x] : P, B = x < w - 1 ? src[y * w + x + 1] : P;
+      const C = x > 0 ? src[y * w + x - 1] : P, D = y < h - 1 ? src[(y + 1) * w + x] : P;
+      const o = y * 2 * W + x * 2;
+      out[o] = C === A && C !== D && A !== B ? A : P;
+      out[o + 1] = A === B && A !== C && B !== D ? B : P;
+      out[o + W] = D === C && D !== B && C !== A ? C : P;
+      out[o + W + 1] = B === D && B !== A && D !== C ? D : P;
+    }
+    return out;
+  };
+  const renderHD = shifts => {
+    const ramp = PALETTES[state.palette].ramp, g = hex(GROUNDS[state.ground].hex);
+    const B = 2, w = CW + 2 * B, h = CH + 2 * B;
+    let grid = new Int8Array(w * h);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) grid[y * w + x] = lookup(x - B, y - B, shifts) & 7;
+    grid = scale2x(scale2x(grid, w, h), w * 2, h * 2);
+    const fw = w * 4, fh = h * 4;
+    // 0 outside, 1 inside, 2 near an edge (only those pay for exact coverage).
+    const zw = CW + 2, zone = new Uint8Array(zw * (CH + 2));
+    for (let y = -1; y <= CH; y++) for (let x = -1; x <= CW; x++) {
+      let on = 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const mx = x + dx, my = y + dy;
+        if (mx >= 0 && my >= 0 && mx < CW && my < CH && mask[my * CW + mx]) on++;
+      }
+      zone[(y + 1) * zw + x + 1] = on === 0 ? 0 : on === 9 ? 1 : 2;
+    }
+    const W = artW * res, H = artH * res, img = ctx.createImageData(W, H), data = img.data;
+    for (let J = 0; J < H; J++) for (let I = 0; I < W; I++) {
+      const cx = (I + .5) / res - offX, cy = (J + .5) / res - offY, o = (J * W + I) * 4;
+      const zx = Math.floor(cx), zy = Math.floor(cy);
+      const z = zx < -1 || zy < -1 || zx > CW || zy > CH ? 0 : zone[(zy + 1) * zw + zx + 1];
+      const a = z === 1 ? 1 : z === 2 ? Math.max(0, Math.min(1, coverage(cx, cy) * res + .5)) : 0;
+      let c = g;
+      if (a > 0) {
+        const fi = Math.max(0, Math.min(fw - 1, I - (offX - B) * 4)), fj = Math.max(0, Math.min(fh - 1, J - (offY - B) * 4));
+        const v = ramp[grid[fj * fw + fi]];
+        c = a === 1 ? v : [g[0] + (v[0] - g[0]) * a, g[1] + (v[1] - g[1]) * a, g[2] + (v[2] - g[2]) * a];
+      }
+      data[o] = c[0]; data[o + 1] = c[1]; data[o + 2] = c[2]; data[o + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+  };
+
+  const resize = () => {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    const fill = params.size / 100;
+    const p = Math.min(w * fill / CW, h * Math.min(.95, fill * 1.17) / CH);
+    artW = Math.ceil(w / p) + 2; artH = Math.ceil(h / p) + 2;
+    offX = Math.floor((artW - CW) / 2); offY = Math.floor((artH - CH) / 2);
+    res = hd ? 4 : 1;
+    canvas.width = artW * res; canvas.height = artH * res;
+    canvas.style.imageRendering = hd ? 'auto' : '';
+    canvas.style.width = `${artW * p}px`; canvas.style.height = `${artH * p}px`;
+    render(true);
+  };
+
+  const rebuild = () => {
+    layers = SCENES[state.scene].build(state.seed);
+    stage.style.setProperty('--ground', GROUNDS[state.ground].hex);
+    history.replaceState(null, '', `#${state.scene}.${state.palette}.${state.ground}.${state.seed}`);
+    document.querySelectorAll('.chips button').forEach(b => b.setAttribute('aria-pressed', String(state[b.parentElement.dataset.key] === b.dataset.value)));
+    render(true);
+    syncPlayground();
+  };
+
+  const options = { scene: SCENES, palette: PALETTES, ground: GROUNDS };
+  document.querySelectorAll('.chips').forEach(group => {
+    const key = group.dataset.key;
+    Object.entries(options[key]).forEach(([value, option]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.value = value;
+      if (key === 'palette') button.innerHTML = `<span class="swatch" style="background:linear-gradient(135deg, rgb(${option.ramp[1]}), rgb(${option.ramp[5]}))"></span>`;
+      if (key === 'ground') button.innerHTML = `<span class="swatch" style="background:${option.hex}"></span>`;
+      button.append(option.label);
+      button.addEventListener('click', () => { state[key] = value; rebuild(); });
+      group.append(button);
+    });
+  });
+
+  const hdButton = document.getElementById('hd');
+  const setHD = on => {
+    hd = on;
+    hdButton.setAttribute('aria-pressed', String(on));
+    knobs.filter(k => k.dataset.param === 'pixel' || k.dataset.param === 'scanlines').forEach(k => { k.disabled = on; });
+    resize();
+    rebuild();
+  };
+  hdButton.addEventListener('click', () => setHD(!hd));
+  document.getElementById('reroll').addEventListener('click', () => { state.seed = Math.floor(Math.random() * 9999) + 1; rebuild(); });
+
+  document.getElementById('save').addEventListener('click', () => {
+    const held = { x: tilt.x, y: tilt.y };
+    tilt.x = tilt.y = 0; render(true);
+    const pad = 14, scale = 8, out = document.createElement('canvas');
+    out.width = (CW + pad * 2) * scale; out.height = (CH + pad * 2) * scale;
+    const o = out.getContext('2d');
+    o.imageSmoothingEnabled = hd;
+    o.drawImage(canvas, (offX - pad) * res, (offY - pad) * res, (CW + pad * 2) * res, (CH + pad * 2) * res, 0, 0, out.width, out.height);
+    Object.assign(tilt, held); render(true);
+    out.toBlob(blob => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `triangles-${state.scene}-${state.palette}-${state.seed}.png`;
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    });
+  });
+
+  // Playground: every knob writes into params/state, and settings.json mirrors all of it.
+  const toHex = c => '#' + c.map(n => Math.round(n).toString(16).padStart(2, '0')).join('');
+  const knobs = [...document.querySelectorAll('[data-param]')];
+  const seedInput = document.getElementById('seedInput');
+  const groundInput = document.getElementById('groundInput');
+  const config = document.getElementById('config');
+  const source = document.querySelector('#source code');
+  const rampInputs = Array.from({ length: 8 }, (_, i) => {
+    const input = document.createElement('input');
+    input.type = 'color';
+    input.setAttribute('aria-label', `Shade ${i + 1} of 8, lightest to darkest`);
+    input.addEventListener('input', () => {
+      PALETTES.custom = { label: 'Custom', ramp: rampInputs.map(el => hex(el.value)) };
+      state.palette = 'custom';
+      rebuild();
+    });
+    document.getElementById('rampInputs').append(input);
+    return input;
+  });
+  const formats = { size: v => `${v}%`, pixel: v => `${v}×`, gap: v => (+v).toFixed(1), scanlines: v => `${v}%`, depth: v => v };
+
+  const settings = () => ({
+    scene: state.scene,
+    seed: state.seed,
+    hd,
+    ...params,
+    colours: PALETTES[state.palette].ramp.map(toHex),
+    ground: GROUNDS[state.ground].hex
+  });
+
+  const dedent = code => {
+    const lines = code.split('\n');
+    const indent = Math.min(...lines.slice(1).filter(l => l.trim()).map(l => l.match(/^ */)[0].length));
+    return [lines[0], ...lines.slice(1).map(l => l.slice(indent - 2))].join('\n');
+  };
+
+  function syncPlayground() {
+    knobs.forEach(input => { input.value = params[input.dataset.param]; input.nextElementSibling.value = formats[input.dataset.param](input.value); });
+    seedInput.value = state.seed;
+    PALETTES[state.palette].ramp.forEach((c, i) => { rampInputs[i].value = toHex(c); });
+    groundInput.value = GROUNDS[state.ground].hex;
+    if (document.activeElement !== config) { config.value = JSON.stringify(settings(), null, 2).replace(/\[\s+([^\]]+?)\s+\]/, (_, list) => `[${list.split(/,\s+/).join(', ')}]`); config.classList.remove('invalid'); }
+    document.getElementById('sourceName').textContent = `${state.scene}.js`;
+    source.textContent = `// ${SCENES[state.scene].label}: each layer is a grid of shade indices (0 lightest, 7 darkest)\n${dedent(SCENES[state.scene].build.toString())}`;
+  }
+
+  const setParam = (key, value) => {
+    params[key] = value;
+    if (key === 'gap') ({ mask, edges } = buildMask(value));
+    if (key === 'size') resize(); else render(true);
+    syncPlayground();
+  };
+  knobs.forEach(input => input.addEventListener('input', () => setParam(input.dataset.param, Number(input.value))));
+  seedInput.addEventListener('change', () => { const n = Math.round(Number(seedInput.value)); if (n > 0) { state.seed = n; rebuild(); } });
+  groundInput.addEventListener('input', () => { GROUNDS.custom = { label: 'Custom', hex: groundInput.value }; state.ground = 'custom'; rebuild(); });
+
+  document.getElementById('resetParams').addEventListener('click', () => {
+    Object.assign(params, DEFAULTS);
+    ({ mask, edges } = buildMask(params.gap));
+    if (state.palette === 'custom') state.palette = 'moss';
+    if (state.ground === 'custom') state.ground = 'white';
+    resize();
+    rebuild();
+  });
+
+  document.getElementById('applyConfig').addEventListener('click', () => {
+    try {
+      const next = JSON.parse(config.value);
+      const isHex = v => typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v);
+      if (!SCENES[next.scene]) throw new Error('scene');
+      if (!Array.isArray(next.colours) || next.colours.length !== 8 || !next.colours.every(isHex) || !isHex(next.ground)) throw new Error('colours');
+      const clamp = (v, lo, hi, fallback) => Number.isFinite(+v) ? Math.min(hi, Math.max(lo, +v)) : fallback;
+      params.size = clamp(next.size, 40, 95, DEFAULTS.size);
+      params.pixel = Math.round(clamp(next.pixel, 1, 4, DEFAULTS.pixel));
+      params.gap = clamp(next.gap, 0, 6, DEFAULTS.gap);
+      params.scanlines = clamp(next.scanlines, 0, 20, DEFAULTS.scanlines);
+      params.depth = clamp(next.depth, 0, 16, DEFAULTS.depth);
+      ({ mask, edges } = buildMask(params.gap));
+      state.scene = next.scene;
+      state.seed = Math.max(1, Math.round(clamp(next.seed, 1, 99999, state.seed)));
+      const named = Object.keys(PALETTES).find(key => key !== 'custom' && PALETTES[key].ramp.map(toHex).join() === next.colours.join().toLowerCase());
+      if (named) state.palette = named; else { PALETTES.custom = { label: 'Custom', ramp: next.colours.map(hex) }; state.palette = 'custom'; }
+      const ground = Object.keys(GROUNDS).find(key => key !== 'custom' && GROUNDS[key].hex === next.ground.toLowerCase());
+      if (ground) state.ground = ground; else { GROUNDS.custom = { label: 'Custom', hex: next.ground }; state.ground = 'custom'; }
+      config.blur();
+      if (Boolean(next.hd) !== hd) setHD(Boolean(next.hd)); else { resize(); rebuild(); }
+    } catch {
+      config.classList.add('invalid');
+    }
+  });
+  config.addEventListener('input', () => config.classList.remove('invalid'));
+
+  const copy = (button, text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      button.textContent = 'Copied';
+      setTimeout(() => { button.textContent = 'Copy'; }, 1200);
+    });
+  };
+  document.getElementById('copyConfig').addEventListener('click', e => copy(e.currentTarget, config.value));
+  document.getElementById('copySource').addEventListener('click', e => copy(e.currentTarget, source.textContent));
+
+  // Pointer parallax: nearer layers slide further, in whole pixels.
+  let raf = 0;
+  const animate = () => {
+    tilt.x += (tilt.tx - tilt.x) * .12; tilt.y += (tilt.ty - tilt.y) * .12;
+    render(false);
+    raf = Math.abs(tilt.tx - tilt.x) + Math.abs(tilt.ty - tilt.y) > .002 ? requestAnimationFrame(animate) : 0;
+  };
+  const aim = (x, y) => { tilt.tx = x; tilt.ty = y; if (!raf && !reduceMotion) raf = requestAnimationFrame(animate); };
+  stage.addEventListener('pointermove', e => { const b = stage.getBoundingClientRect(); aim((e.clientX - b.left) / b.width * 2 - 1, (e.clientY - b.top) / b.height * 2 - 1); });
+  stage.addEventListener('pointerleave', () => aim(0, 0));
+
+  new ResizeObserver(resize).observe(stage);
+  rebuild();
+})();
+</script>
+</body>
+</html>
