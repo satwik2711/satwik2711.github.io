@@ -150,6 +150,9 @@
     .news-section .section-label { margin-bottom: 30px; }
     .news-item { grid-template-columns: 1fr; gap: 4px; }
   }
+
+  /* Site-wide 80% scale; min-height compensates so short pages still fill the screen. */
+  body { zoom: .8; min-height: 125vh; }
 </style>
 </head>
 <body>
@@ -200,7 +203,7 @@
       <h2 class="section-label">About</h2>
       <div class="about-body">
         <p>Hi, I’m Satwik. I’m an independent researcher working on the safety and reliability of reasoning and agentic systems.</p>
-        <p><a href="publications.html">My work</a> spans uncertainty quantification, multimodal failure modes, reasoning and agentic evaluation, and interpretability, with a recurring focus on understanding when models fail and how those failures can be detected or audited. I’m drawn to the space between academic research and deployment, methods that hold up outside a benchmark and can actually be run on a system someone depends on. My research has appeared at <strong>NeurIPS 2026 (main track)</strong> , alongside workshop papers at <strong>NeurIPS</strong>, <strong>ICML</strong> and <strong>COLM 2026</strong>.</p>
+        <p><a href="publications.html">My work</a> spans uncertainty quantification, multimodal failure modes, reasoning and agentic evaluation, and interpretability, with a recurring focus on understanding when models fail and how those failures can be detected or audited. I’m drawn to the space between academic research and deployment, methods that hold up outside a benchmark and can actually be run on a system someone depends on. My research has appeared at <strong>NeurIPS 2026 (main track)</strong>, alongside workshop papers at <strong>NeurIPS</strong>, <strong>ICML</strong> and <strong>COLM 2026</strong>.</p>
         <p>By day, I’m an AI Research Engineer at <a href="https://www.vfsglobal.com/en/general/about.html?from_section=0" target="_blank" rel="noopener">VFS Global</a>, where I work on production LLM/VLM systems for document intelligence, confidence-aware routing, and multimodal verification, serving 110+ countries at over 4M calls a day.</p>
         <p>More recently, I’ve been moving deeper into mechanistic interpretability, with a <a href="https://www.alignmentforum.org/posts/StENzDcD3kpfGJssR/a-pragmatic-vision-for-interpretability" target="_blank" rel="noopener">pragmatic</a> and <a href="https://actionable-interpretability-guide.github.io/paper.pdf" target="_blank" rel="noopener">actionable</a> bent: I’m most interested in cases where understanding model internals helps answer a concrete safety question or enables a better audit, intervention, or decision. In particular, I’m interested in model forensics, memorization and unlearning, faithfulness, and chain-of-thought monitorability.</p>
         <p>I’m also weirdly obsessed with triangles (⌥ + J), so I built a <a href="triangles.html">∆ tessellator</a> that renders scenes as interlocking deltas for no specific reason at all.</p>

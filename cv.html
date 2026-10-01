@@ -13,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -123,7 +123,7 @@
     line-height: 1.25;
     margin-bottom: 5px;
   }
-  .timeline-role { font-size: calc(0.84rem + 1px); font-weight: 600; color: var(--green-dim); margin-bottom: 13px; }
+  .timeline-role { font-size: calc(0.9rem + 1px); color: var(--green-dim); margin-bottom: 13px; }
   .timeline-place { padding-top: 4px; font-size: calc(0.76rem + 1px); color: var(--text-dim); line-height: 1.4; text-align: right; }
   .timeline-points { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .timeline-points li { font-size: calc(0.88rem + 1px); line-height: 1.58; color: var(--text-muted); padding-left: 16px; position: relative; }
@@ -139,13 +139,13 @@
   .pub-entry:last-child { padding-bottom: 0; border-bottom: none; }
   .pub-year { padding-top: 4px; font-size: calc(0.78rem + 1px); font-weight: 600; letter-spacing: 0.1em; color: var(--text-dim); }
   .pub-content { min-width: 0; }
-  .pub-status { padding-top: 4px; font-size: calc(0.76rem + 1px); font-weight: 600; color: var(--green-dim); white-space: nowrap; text-align: right; }
+  .pub-status { padding-top: 4px; font-size: calc(0.9rem + 1px); color: var(--green-dim); white-space: nowrap; text-align: right; }
   .pub-title { font-family: var(--font-display); font-size: calc(1.2rem + 2px); font-weight: 600; color: var(--heading); line-height: 1.25; margin-bottom: 8px; }
-  .pub-authors { font-size: calc(0.84rem + 1px); color: var(--text-dim); margin-bottom: 10px; }
+  .pub-authors { font-size: calc(0.9rem + 1px); color: var(--text-dim); margin-bottom: 10px; }
   .pub-authors strong { color: var(--text); font-weight: 600; }
   .pub-authors sup { font-size: 0.68em; vertical-align: super; }
-  .pub-details { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 9px; margin-bottom: 13px; font-size: calc(0.8rem + 1px); font-weight: 600; color: var(--green-dim); }
-  .pub-details .separator { font-weight: 400; color: var(--text-dim); }
+  .pub-details { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 9px; margin-bottom: 13px; font-size: calc(0.9rem + 1px); color: var(--green-dim); }
+  .pub-details .separator { color: var(--text-dim); }
   .pub-venue-note { color: var(--green-dim); }
   .pub-description { font-size: calc(0.88rem + 1px); line-height: 1.58; color: var(--text-muted); }
   .pub-link { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--green-border); padding-bottom: 1px; }
@@ -186,6 +186,9 @@
     .page-wrap { padding: 0; max-width: 100%; }
     html { font-size: 14px; }
   }
+
+  /* Site-wide 80% scale; min-height compensates so short pages still fill the screen. */
+  body { zoom: .8; min-height: 125vh; }
 </style>
 </head>
 <body>
