@@ -13,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -123,7 +123,7 @@
     line-height: 1.25;
     margin-bottom: 5px;
   }
-  .timeline-role { font-size: calc(0.84rem + 1px); color: var(--green-dim); margin-bottom: 13px; }
+  .timeline-role { font-size: calc(0.84rem + 1px); font-weight: 600; color: var(--green-dim); margin-bottom: 13px; }
   .timeline-place { padding-top: 4px; font-size: calc(0.76rem + 1px); color: var(--text-dim); line-height: 1.4; text-align: right; }
   .timeline-points { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .timeline-points li { font-size: calc(0.88rem + 1px); line-height: 1.58; color: var(--text-muted); padding-left: 16px; position: relative; }
@@ -139,13 +139,13 @@
   .pub-entry:last-child { padding-bottom: 0; border-bottom: none; }
   .pub-year { padding-top: 4px; font-size: calc(0.78rem + 1px); font-weight: 600; letter-spacing: 0.1em; color: var(--text-dim); }
   .pub-content { min-width: 0; }
-  .pub-status { padding-top: 4px; font-size: calc(0.76rem + 1px); color: var(--green-dim); white-space: nowrap; text-align: right; }
+  .pub-status { padding-top: 4px; font-size: calc(0.76rem + 1px); font-weight: 600; color: var(--green-dim); white-space: nowrap; text-align: right; }
   .pub-title { font-family: var(--font-display); font-size: calc(1.2rem + 2px); font-weight: 600; color: var(--heading); line-height: 1.25; margin-bottom: 8px; }
   .pub-authors { font-size: calc(0.84rem + 1px); color: var(--text-dim); margin-bottom: 10px; }
   .pub-authors strong { color: var(--text); font-weight: 600; }
   .pub-authors sup { font-size: 0.68em; vertical-align: super; }
-  .pub-details { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 9px; margin-bottom: 13px; font-size: calc(0.8rem + 1px); color: var(--green-dim); }
-  .pub-details .separator { color: var(--text-dim); }
+  .pub-details { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 9px; margin-bottom: 13px; font-size: calc(0.8rem + 1px); font-weight: 600; color: var(--green-dim); }
+  .pub-details .separator { font-weight: 400; color: var(--text-dim); }
   .pub-venue-note { color: var(--green-dim); }
   .pub-description { font-size: calc(0.88rem + 1px); line-height: 1.58; color: var(--text-muted); }
   .pub-link { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--green-border); padding-bottom: 1px; }
@@ -231,7 +231,7 @@
       <div class="timeline-date">Aug 2026 – Present</div>
       <div class="timeline-content">
         <h3 class="timeline-title">Mohamed bin Zayed University of Artificial Intelligence · Kang Lab</h3>
-        <p class="timeline-role">Research Collaborator · Advisor: Prof. Jian Kang</p>
+        <p class="timeline-role">Research Collaborator · Mechanistic Interpretability · Advisor: Prof. Jian Kang</p>
         <ul class="timeline-points">
           <li>Investigating decorative verification in reasoning LMs: whether self-checking language such as verification, backtracking, and reconsideration can occur without the causal computation needed to update model beliefs.</li>
           <li>Studying which reasoning operations—including alternative exploration, contradiction detection, backtracking, and evidence integration—genuinely improve calibration versus merely signal epistemic caution.</li>
@@ -272,29 +272,33 @@
     <article class="pub-entry">
       <div class="pub-year">2026</div>
       <div class="pub-content">
-        <h3 class="pub-title">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</h3>
-        <p class="pub-authors">Shashwat Pandey<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong>, Suresh Raghu</p>
-        <div class="pub-details">
-          <a class="pub-link" href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">arXiv:2608.23663</a>
-        </div>
-        <p class="pub-description">Audited a deployed on-device language model for reliability and oversight, showing that confident-correct and confident-wrong outputs are surface-indistinguishable (AUROC 0.55); introduced a model-agnostic audit protocol and a black-box consistency wrapper that reduced confident confabulation from 75% to 3%.</p>
-      </div>
-      <div class="pub-status">(Preprint)</div>
-    </article>
-
-    <article class="pub-entry">
-      <div class="pub-year">2026</div>
-      <div class="pub-content">
         <h3 class="pub-title">Proper Scoring Rules for Agentic Uncertainty Quantification</h3>
         <p class="pub-authors">Suresh Raghu<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong>, Shashwat Pandey</p>
         <div class="pub-details">
           <a class="pub-link" href="https://arxiv.org/abs/2605.24756" target="_blank" rel="noopener">arXiv:2605.24756</a>
           <span class="separator">|</span>
-          <span class="pub-venue-note">Accepted (poster) at CTB &amp; FAGEN Workshops @ ICML 2026</span>
+          <span class="pub-venue-note">Accepted (poster) at NeurIPS 2026 (Main Track)</span>
+          <span class="separator">|</span>
+          <span class="pub-venue-note">CTB &amp; FAGEN Workshops @ ICML 2026</span>
         </div>
         <p class="pub-description">Introduced a family of strictly proper trajectory-level scoring rules for evaluating uncertainty in LM agents, with a censored-trace extension and negative results establishing that standard trajectory-level calibration metrics (ECE, Brier) are not strictly proper in the agentic setting.</p>
       </div>
-      <div class="pub-status">(Preprint)</div>
+      <div class="pub-status">(Conference)</div>
+    </article>
+
+    <article class="pub-entry">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h3 class="pub-title">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</h3>
+        <p class="pub-authors">Shashwat Pandey<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong>, Suresh Raghu</p>
+        <div class="pub-details">
+          <a class="pub-link" href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">arXiv:2608.23663</a>
+          <span class="separator">|</span>
+          <span class="pub-venue-note">Accepted (poster) at the ODI Workshop @ NeurIPS 2026</span>
+        </div>
+        <p class="pub-description">Audited a deployed on-device language model for reliability and oversight, showing that confident-correct and confident-wrong outputs are surface-indistinguishable (AUROC 0.55); introduced a model-agnostic audit protocol and a black-box consistency wrapper that reduced confident confabulation from 75% to 3%.</p>
+      </div>
+      <div class="pub-status">(Workshop)</div>
     </article>
 
     <article class="pub-entry">
@@ -311,7 +315,7 @@
         </div>
         <p class="pub-description">Proposed an O(1) black-box uncertainty framework that extracts behavioral hedge/verify signals from reasoning traces, significantly outperforming Semantic Entropy on discrimination (<i>p</i>=0.001) at 10× lower cost; a zero-hedge gate achieves 96.1% precision across 7 models and 3 benchmarks.</p>
       </div>
-      <div class="pub-status">(Preprint)</div>
+      <div class="pub-status">(Workshop)</div>
     </article>
 
     <article class="pub-entry">
@@ -322,22 +326,22 @@
         <div class="pub-details">
           <a class="pub-link" href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener">arXiv:2604.04207</a>
           <span class="separator">|</span>
-          <span class="pub-venue-note">Accepted (poster) at AIW &amp; SCI-FM Workshops @ COLM 2026</span>
+          <span class="pub-venue-note">Accepted (poster) at AIW &amp; Sci-FM Workshops @ COLM 2026</span>
           <span class="separator">|</span>
           <a class="pub-link" href="https://github.com/satwik2711/Dont-Blink" target="_blank" rel="noopener">Code</a>
         </div>
         <p class="pub-description">Identified a universal evidence collapse phenomenon in reasoning VLMs, observing visual attention drops up to 90.8% during generation and discovering a task-conditional failure regime where confident but visually disengaged predictions are hazardous on sustained visual reference tasks but benign on symbolic tasks.</p>
       </div>
-      <div class="pub-status">(Preprint)</div>
+      <div class="pub-status">(Workshop)</div>
     </article>
 
     <article class="pub-entry">
       <div class="pub-year">2026</div>
       <div class="pub-content">
-        <h3 class="pub-title">Repair of Thought: Advancing Automated Program Repair through a Dual-Model Reasoning Framework</h3>
+        <h3 class="pub-title">Repair of Thought: Advancing Automated Program Repair through Dual-Model Reasoning</h3>
         <p class="pub-authors"><strong>Satwik Pandey</strong>, et al.</p>
         <div class="pub-details">
-          <span class="pub-venue-note">Under review at the Journal of Systems and Software</span>
+          <span class="pub-venue-note">Manuscript under review</span>
           <span class="separator">|</span>
           <a class="pub-link" href="https://github.com/satwik2711/Repair-Of-Thought" target="_blank" rel="noopener">Code</a>
         </div>
@@ -368,11 +372,11 @@
       <div class="interests">
         <span class="interest-tag">Natural Language Processing</span>
         <span class="interest-tag">Large Language Models</span>
+        <span class="interest-tag">AI Safety</span>
         <span class="interest-tag">Uncertainty Quantification</span>
-        <span class="interest-tag">Reliability</span>
         <span class="interest-tag">Interpretability</span>
         <span class="interest-tag">Trustworthy AI</span>
-        <span class="interest-tag">AI Safety / Security</span>
+        <span class="interest-tag">Agentic Safety</span>
       </div>
     </div>
   </div>
