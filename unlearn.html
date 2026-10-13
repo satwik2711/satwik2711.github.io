@@ -584,6 +584,37 @@ body{zoom:.8}
   .article .brief h2{font-size:26pt}
   .brief li{font-size:11pt}
 }
+
+/* Figure 1 adapts to its own width, including site zoom and the contents column. */
+#workflow-chart{container-type:inline-size}
+#workflow-chart .wfl,#workflow-chart .wfl-steps,#workflow-chart .wstep{min-width:0}
+#workflow-chart .wfl-split{grid-template-columns:minmax(0,3fr) minmax(0,1fr)}
+#workflow-chart .wfl-split>span{min-width:0;flex-wrap:wrap;gap:4px 8px}
+#workflow-chart .wfl-steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+#workflow-chart .ws-head{min-width:0;flex-wrap:wrap;row-gap:4px}
+#workflow-chart .ws-art{height:auto;min-height:112px;flex-shrink:0;padding:6px 0}
+#workflow-chart .art-recover{display:grid;grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr);gap:6px;min-width:0}
+#workflow-chart .art-recover .col{min-width:0}
+#workflow-chart .art-recover .col>span:not(.mini-stack){width:100%;white-space:normal;text-align:center;line-height:1.2;min-height:24px}
+#workflow-chart .art-recover svg{width:32px;height:24px;margin-bottom:24px}
+#workflow-chart .art-freeze,#workflow-chart .art-transfer{min-width:0}
+#workflow-chart .chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));min-width:0;flex:1}
+#workflow-chart .chips span{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.2}
+#workflow-chart .rx{grid-template-columns:8px minmax(0,1fr) auto 18px}
+#workflow-chart .rx b{white-space:normal;line-height:1.25;min-width:0}
+#workflow-chart .wstep>p{overflow-wrap:break-word}
+@container (max-width:860px){
+  #workflow-chart .wfl-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  #workflow-chart .wfl-split{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #workflow-chart .wstep:nth-child(2)::after{display:none}
+  #workflow-chart .wstep:not(.last)::after{right:-13px;top:50%;bottom:auto;margin:-5px 0 0;transform:rotate(45deg)}
+}
+@container (max-width:520px){
+  #workflow-chart .wfl-steps{grid-template-columns:minmax(0,1fr)}
+  #workflow-chart .wfl-split{display:none}
+  #workflow-chart .ws-where{display:inline}
+  #workflow-chart .wstep:not(.last)::after{display:block;right:50%;top:auto;bottom:-13px;margin:0 -5px 0 0;transform:rotate(135deg)}
+}
 </style>
 </head>
 <body>
