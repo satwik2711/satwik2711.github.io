@@ -230,16 +230,162 @@
   </div>
 
   <div class="cv-section">
+    <h2 class="section-label">Education</h2>
+    <article class="timeline-entry">
+      <div class="timeline-date">Aug 2021 – June 2025</div>
+      <div class="timeline-content">
+        <h3 class="timeline-title">Jaypee Institute of Information Technology</h3>
+        <p class="timeline-role">Bachelor of Technology in Computer Science</p>
+      </div>
+      <div class="timeline-place">Noida, India</div>
+    </article>
+  </div>
+
+  <div class="cv-section">
+    <h2 class="section-label">Research Interests</h2>
+    <div class="interests-row">
+      <div class="interests-kicker">Focus</div>
+      <div class="interests">
+        <span class="interest-tag">AI Alignment</span>
+        <span class="interest-tag">Agent Oversight &amp; Monitoring</span>
+        <span class="interest-tag">Interpretability</span>
+        <span class="interest-tag">Behavioral Evaluations</span>
+        <span class="interest-tag">Uncertainty Quantification</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-section publications-section" id="publications">
+    <h2 class="section-label">Publications &amp; Manuscripts</h2>
+
+    <article class="pub-entry">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h3 class="pub-title">Proper Scoring Rules for Agentic Uncertainty Quantification</h3>
+        <p class="pub-authors">Suresh Raghu<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong>, Shashwat Pandey</p>
+        <div class="pub-details">
+          <a class="pub-link" href="https://arxiv.org/abs/2605.24756" target="_blank" rel="noopener">arXiv:2605.24756</a>
+          <span class="separator">|</span>
+          <span class="pub-venue-note">NeurIPS 2026</span>
+          <span class="separator">|</span>
+          <span class="pub-venue-note">ICML 2026 Workshops (FAGEN, CTB)</span>
+        </div>
+        <ul class="timeline-points">
+          <li>Reliable agent oversight requires accurate stepwise success probabilities, yet existing trajectory-level metrics do not strictly elicit them. Introduced the Trajectory Proper Score (TPS), a family of strictly proper scoring rules with extensions to censored trajectories.</li>
+          <li>Established theoretical limitations of AUROC, Trajectory ECE, and scalarized Brier scores. On Tau2-Bench, recalibration barely changed AUROC (0.3 SE) but improved TPS by 43 SE, exposing substantial miscalibration.</li>
+        </ul>
+      </div>
+      <div class="pub-status">(Conference)</div>
+    </article>
+
+    <article class="pub-entry">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h3 class="pub-title">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</h3>
+        <p class="pub-authors">Shashwat Pandey<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong>, Suresh Raghu</p>
+        <div class="pub-details">
+          <a class="pub-link" href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">arXiv:2608.23663</a>
+          <span class="separator">|</span>
+          <span class="pub-venue-note">NeurIPS 2026 Workshop on On-Device Intelligence (ODI)</span>
+        </div>
+        <ul class="timeline-points">
+          <li>Developed a model-agnostic reliability audit of Apple’s deployed on-device language model, investigating whether failures in calibration, confabulation, and refusal can be detected without access to model internals.</li>
+          <li>Found that verbalized confidence was non-discriminative (AUROC 0.47) and confident errors were indistinguishable from correct predictions using surface-level features (AUROC 0.55). A black-box consistency wrapper reduced confident confabulation from 75% to 3%.</li>
+        </ul>
+      </div>
+      <div class="pub-status">(Workshop)</div>
+    </article>
+
+    <article class="pub-entry">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h3 class="pub-title">SELFDOUBT: Uncertainty Quantification for Reasoning LLMs via the Hedge-to-Verify Ratio</h3>
+        <p class="pub-authors"><strong>Satwik Pandey<sup>*</sup></strong>, Suresh Raghu<sup>*</sup>, Shashwat Pandey</p>
+        <div class="pub-details">
+          <a class="pub-link" href="https://arxiv.org/abs/2604.06389" target="_blank" rel="noopener">arXiv:2604.06389</a>
+          <span class="separator">|</span>
+          <span class="pub-venue-note">ICML 2026 Workshop on Failure Modes of Agentic AI (FAGEN)</span>
+          <span class="separator">|</span>
+          <a class="pub-link" href="https://github.com/satwik2711/SelfDoubt" target="_blank" rel="noopener">Code</a>
+        </div>
+        <ul class="timeline-points">
+          <li>Existing uncertainty estimation methods are impractical for proprietary reasoning models due to inaccessible logits and expensive repeated sampling. Developed a single-pass uncertainty estimator based on the balance between hedging and verification in reasoning traces.</li>
+          <li>Across 7 models and 3 benchmarks, outperformed Semantic Entropy in AUROC (0.79 vs. 0.74, <i>p</i> = 0.001) at 10× lower inference cost; hedge-free traces (25% of queries) achieved 96.1% precision.</li>
+        </ul>
+      </div>
+      <div class="pub-status">(Workshop)</div>
+    </article>
+
+    <article class="pub-entry">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h3 class="pub-title">Don't Blink: Evidence Collapse during Multimodal Reasoning</h3>
+        <p class="pub-authors">Suresh Raghu<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong></p>
+        <div class="pub-details">
+          <a class="pub-link" href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener">arXiv:2604.04207</a>
+          <span class="separator">|</span>
+          <span class="pub-venue-note">COLM 2026 Workshops (Actionable Interpretability, Sci-FM)</span>
+          <span class="separator">|</span>
+          <a class="pub-link" href="https://github.com/satwik2711/Dont-Blink" target="_blank" rel="noopener">Code</a>
+        </div>
+        <ul class="timeline-points">
+          <li>Investigated whether reasoning VLMs remain grounded in visual evidence throughout generation, tracking attention to annotated evidence regions to identify failures invisible to text-only uncertainty monitors.</li>
+          <li>Discovered 53–91% decay in visual evidence attention across nine model–dataset settings. Identified a task-dependent failure regime where confident visual disengagement is hazardous on visual-reference tasks but benign on symbolic tasks.</li>
+        </ul>
+      </div>
+      <div class="pub-status">(Workshop)</div>
+    </article>
+
+    <article class="pub-entry">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h3 class="pub-title">Can We Trust a Model’s Forgetting? A Causal Audit of Unlearning</h3>
+        <p class="pub-authors"><strong>Satwik Pandey</strong></p>
+        <div class="pub-details">
+          <span class="pub-venue-note">Research blog, 2026</span>
+          <span class="separator">|</span>
+          <a class="pub-link" href="unlearn.html">Post</a>
+        </div>
+        <ul class="timeline-points">
+          <li>Investigated whether machine unlearning removes learned information or suppresses its expression, using controlled refusal adapters and activation steering on Llama-3.2-1B to assess causal recoverability across suppression mechanisms.</li>
+          <li>On held-out authors, the learned steering direction recovered 61% of the target-answer likelihood gap in the refusal model but widened it by 69% in the gradient-difference unlearned model, suggesting that similar behavioral signatures of forgetting can conceal distinct underlying mechanisms.</li>
+        </ul>
+      </div>
+      <div class="pub-status">(Technical Blog)</div>
+    </article>
+
+    <article class="pub-entry">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h3 class="pub-title">Repair of Thought: Advancing Automated Program Repair through Dual-Model Reasoning</h3>
+        <p class="pub-authors"><strong>Satwik Pandey</strong>, et al.</p>
+        <div class="pub-details">
+          <span class="pub-venue-note">Manuscript</span>
+          <span class="separator">|</span>
+          <a class="pub-link" href="https://github.com/satwik2711/Repair-Of-Thought" target="_blank" rel="noopener">Code</a>
+        </div>
+        <ul class="timeline-points">
+          <li>Developed an open-source, dual-model framework for function-level automated program repair, decoupling bug diagnosis from patch generation to improve transparency and reduce reliance on proprietary models.</li>
+          <li>Achieved an 83.1% plausible repair rate and repaired 215 of 522 Defects4J bugs correctly (41.2%). An automated structural, symbolic, and semantic verification pipeline achieved 95.7% agreement with human annotations.</li>
+        </ul>
+      </div>
+      <div class="pub-status">(Manuscript)</div>
+    </article>
+
+    <p class="pub-note"><sup>*</sup> Equal contribution</p>
+  </div>
+
+  <div class="cv-section">
     <h2 class="section-label">Research Experience</h2>
 
     <article class="timeline-entry">
       <div class="timeline-date">Aug 2026 – Present</div>
       <div class="timeline-content">
         <h3 class="timeline-title">Mohamed bin Zayed University of Artificial Intelligence · Kang Lab</h3>
-        <p class="timeline-role">Research Collaborator · Mechanistic Interpretability · Advisor: Prof. Jian Kang</p>
+        <p class="timeline-role">Research Collaborator · Advisor: Prof. Jian Kang · Mentor: Dr. Haolun Wu</p>
         <ul class="timeline-points">
-          <li>Investigating decorative verification in reasoning LMs: whether self-checking language such as verification, backtracking, and reconsideration can occur without the causal computation needed to update model beliefs.</li>
-          <li>Studying which reasoning operations—including alternative exploration, contradiction detection, backtracking, and evidence integration—genuinely improve calibration versus merely signal epistemic caution.</li>
+          <li>Investigating aligned verification in reasoning LMs: whether internal verification verdicts causally drive belief revision, or whether models revise their answers under non-evidential pressure despite contradictory evidence.</li>
+          <li>Developing mechanistic interventions to identify and steer verification representations (Qwen3.5-4B on ZebraLogic), with evaluations on sycophancy and unethical tool calls to assess whether evidence-governed revision improves alignment robustness.</li>
         </ul>
       </div>
       <div class="timeline-place">Remote / Abu Dhabi, UAE</div>
@@ -262,146 +408,88 @@
       <div class="timeline-date">Aug 2023 – May 2024</div>
       <div class="timeline-content">
         <h3 class="timeline-title">Jaypee Institute of Information Technology</h3>
-        <p class="timeline-role">Undergraduate Researcher · Advisor: Prof. Sandeep Kumar Singh</p>
+        <p class="timeline-role">Undergraduate Researcher · Advisors: Prof. Sandeep Kumar Singh, Prof. Bhawna Saxena</p>
         <ul class="timeline-points">
-          <li>Conducted initial experiments on parameter-efficient fine-tuning (Unsloth/QLoRA) which revealed limitations in complex logic repair, motivating a strategic pivot from training-based optimization to an inference-time reasoning framework that became the core contribution of the Repair of Thought publication.</li>
+          <li>Conducted initial experiments on parameter-efficient fine-tuning (Unsloth/QLoRA) which revealed limitations in complex logic repair, motivating a pivot from training-based optimization to the inference-time reasoning framework that became the core contribution of the “Repair of Thought” manuscript.</li>
         </ul>
       </div>
       <div class="timeline-place">Noida, India</div>
     </article>
   </div>
 
-  <div class="cv-section publications-section" id="publications">
-    <h2 class="section-label">Publications &amp; Pre-Prints</h2>
-
-    <article class="pub-entry">
-      <div class="pub-year">2026</div>
-      <div class="pub-content">
-        <h3 class="pub-title">Proper Scoring Rules for Agentic Uncertainty Quantification</h3>
-        <p class="pub-authors">Suresh Raghu<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong>, Shashwat Pandey</p>
-        <div class="pub-details">
-          <a class="pub-link" href="https://arxiv.org/abs/2605.24756" target="_blank" rel="noopener">arXiv:2605.24756</a>
-          <span class="separator">|</span>
-          <span class="pub-venue-note">Accepted (poster) at NeurIPS 2026 (Main Track)</span>
-          <span class="separator">|</span>
-          <span class="pub-venue-note">CTB &amp; FAGEN Workshops @ ICML 2026</span>
-        </div>
-        <p class="pub-description">Introduced a family of strictly proper trajectory-level scoring rules for evaluating uncertainty in LM agents, with a censored-trace extension and negative results establishing that standard trajectory-level calibration metrics (ECE, Brier) are not strictly proper in the agentic setting.</p>
-      </div>
-      <div class="pub-status">(Conference)</div>
-    </article>
-
-    <article class="pub-entry">
-      <div class="pub-year">2026</div>
-      <div class="pub-content">
-        <h3 class="pub-title">Confidently Wrong, Silently So: Auditing Undetectable Failures of a Deployed On-Device Language Model</h3>
-        <p class="pub-authors">Shashwat Pandey<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong>, Suresh Raghu</p>
-        <div class="pub-details">
-          <a class="pub-link" href="https://arxiv.org/abs/2608.23663" target="_blank" rel="noopener">arXiv:2608.23663</a>
-          <span class="separator">|</span>
-          <span class="pub-venue-note">Accepted (poster) at the ODI Workshop @ NeurIPS 2026</span>
-        </div>
-        <p class="pub-description">Audited a deployed on-device language model for reliability and oversight, showing that confident-correct and confident-wrong outputs are surface-indistinguishable (AUROC 0.55); introduced a model-agnostic audit protocol and a black-box consistency wrapper that reduced confident confabulation from 75% to 3%.</p>
-      </div>
-      <div class="pub-status">(Workshop)</div>
-    </article>
-
-    <article class="pub-entry">
-      <div class="pub-year">2026</div>
-      <div class="pub-content">
-        <h3 class="pub-title">SELFDOUBT: Uncertainty Quantification for Reasoning LLMs via the Hedge-to-Verify Ratio</h3>
-        <p class="pub-authors"><strong>Satwik Pandey<sup>*</sup></strong>, Suresh Raghu<sup>*</sup>, Shashwat Pandey</p>
-        <div class="pub-details">
-          <a class="pub-link" href="https://arxiv.org/abs/2604.06389" target="_blank" rel="noopener">arXiv:2604.06389</a>
-          <span class="separator">|</span>
-          <span class="pub-venue-note">Accepted (poster) at the FAGEN Workshop @ ICML 2026</span>
-          <span class="separator">|</span>
-          <a class="pub-link" href="https://github.com/satwik2711/SelfDoubt" target="_blank" rel="noopener">Code</a>
-        </div>
-        <p class="pub-description">Proposed an O(1) black-box uncertainty framework that extracts behavioral hedge/verify signals from reasoning traces, significantly outperforming Semantic Entropy on discrimination (<i>p</i>=0.001) at 10× lower cost; a zero-hedge gate achieves 96.1% precision across 7 models and 3 benchmarks.</p>
-      </div>
-      <div class="pub-status">(Workshop)</div>
-    </article>
-
-    <article class="pub-entry">
-      <div class="pub-year">2026</div>
-      <div class="pub-content">
-        <h3 class="pub-title">Don't Blink: Evidence Collapse during Multimodal Reasoning</h3>
-        <p class="pub-authors">Suresh Raghu<sup>*</sup>, <strong>Satwik Pandey<sup>*</sup></strong></p>
-        <div class="pub-details">
-          <a class="pub-link" href="https://arxiv.org/abs/2604.04207" target="_blank" rel="noopener">arXiv:2604.04207</a>
-          <span class="separator">|</span>
-          <span class="pub-venue-note">Accepted (poster) at AIW &amp; Sci-FM Workshops @ COLM 2026</span>
-          <span class="separator">|</span>
-          <a class="pub-link" href="https://github.com/satwik2711/Dont-Blink" target="_blank" rel="noopener">Code</a>
-        </div>
-        <p class="pub-description">Identified a universal evidence collapse phenomenon in reasoning VLMs, observing visual attention drops up to 90.8% during generation and discovering a task-conditional failure regime where confident but visually disengaged predictions are hazardous on sustained visual reference tasks but benign on symbolic tasks.</p>
-      </div>
-      <div class="pub-status">(Workshop)</div>
-    </article>
-
-    <article class="pub-entry">
-      <div class="pub-year">2026</div>
-      <div class="pub-content">
-        <h3 class="pub-title">Repair of Thought: Advancing Automated Program Repair through Dual-Model Reasoning</h3>
-        <p class="pub-authors"><strong>Satwik Pandey</strong>, et al.</p>
-        <div class="pub-details">
-          <span class="pub-venue-note">Manuscript under review</span>
-          <span class="separator">|</span>
-          <a class="pub-link" href="https://github.com/satwik2711/Repair-Of-Thought" target="_blank" rel="noopener">Code</a>
-        </div>
-        <p class="pub-description">Introduced a function-level APR framework achieving a SOTA 83.1% plausible repair rate on Defects4J, with an automated verification pipeline combining AST alignment, control-flow symbolic analysis, and semantic checks.</p>
-      </div>
-      <div class="pub-status">(Under Review)</div>
-    </article>
-
-    <p class="pub-note"><sup>*</sup> Equal contribution</p>
-  </div>
-
   <div class="cv-section">
-    <h2 class="section-label">Education</h2>
-    <article class="timeline-entry">
-      <div class="timeline-date">Aug 2021 – May 2025</div>
-      <div class="timeline-content">
-        <h3 class="timeline-title">Jaypee Institute of Information Technology</h3>
-        <p class="timeline-role">Bachelor of Technology in Computer Science · CGPA: 3.3 / 4.0</p>
-      </div>
-      <div class="timeline-place">Noida, India</div>
-    </article>
-  </div>
-
-  <div class="cv-section">
-    <h2 class="section-label">Research Interests</h2>
-    <div class="interests-row">
-      <div class="interests-kicker">Focus</div>
-      <div class="interests">
-        <span class="interest-tag">Natural Language Processing</span>
-        <span class="interest-tag">Large Language Models</span>
-        <span class="interest-tag">AI Safety</span>
-        <span class="interest-tag">Uncertainty Quantification</span>
-        <span class="interest-tag">Interpretability</span>
-        <span class="interest-tag">Trustworthy AI</span>
-        <span class="interest-tag">Agentic Safety</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="cv-section">
-    <h2 class="section-label">Professional Experience</h2>
+    <h2 class="section-label">Industry Experience</h2>
 
     <article class="timeline-entry">
       <div class="timeline-date">Dec 2024 – Present</div>
       <div class="timeline-content">
         <h3 class="timeline-title">VFS Global</h3>
-        <p class="timeline-role">AI Research Engineer</p>
+        <p class="timeline-role">Founding AI Engineer (Deputy Manager – AI)</p>
         <ul class="timeline-points">
-          <li>Investigated dynamic execution paths for multi-agent frameworks. Designed a complexity-based routing mechanism that differentiates between deterministic tasks handled by parsers and ambiguous instances routed to reasoning-capable VLMs, optimizing the trade-off between inference cost and reasoning accuracy.</li>
-          <li>Integrated a two-stage confidence pipeline: token-level logit probabilities aggregated via Shannon entropy serve as a lightweight first-pass filter for extraction uncertainty, with high-entropy predictions escalated to a reasoning VLM-as-a-Judge for cross-modal extraction verification.</li>
-          <li>Designed a trace-guided re-extraction mechanism for cascade-rejected fields that fail both entropy screening and judge validation. The judge's reasoning traces are converted into corrective context for a secondary extraction model, enabling targeted recovery from extraction errors such as character misreads, boundary confusion, and semantic misattribution.</li>
-          <li>Designed a multi-level verification framework for biometric photo validation, separating signal-level quality assessment from semantic-level attribute verification with fine-tuned VLMs. The staged design isolated distinct failure modes and improved the interpretability of rejection decisions.</li>
+          <li>Founding engineer of the AI team (now 8 people) behind the multi-agent Intelligent Document Processing (IDP) platform, which serves 50,000+ requests per day across 25 countries.</li>
+          <li>Proposed and built an uncertainty router for visa-document extraction on the IDP platform: token-level entropy screens each extracted field, high-entropy fields escalate to multi-sample semantic entropy and a reasoning VLM-as-a-Judge, and unresolved cases go to a human reviewer. Embassy-flagged sensitive errors fell by ∼87% within a month.</li>
+          <li>Led development of an agentic document-verification platform for a national government client: specialist agents navigate the client’s standard operating procedures with grep-style search rather than embedding retrieval, run per-document and cross-document checks, and return an evidence-cited verdict for every rule, abstaining to human review when evidence is missing or ambiguous.</li>
         </ul>
       </div>
       <div class="timeline-place">New Delhi, India</div>
+    </article>
+  </div>
+
+  <div class="cv-section">
+    <h2 class="section-label">Honors &amp; Awards</h2>
+
+    <article class="timeline-entry">
+      <div class="timeline-date">2026</div>
+      <div class="timeline-content">
+        <h3 class="timeline-title">Aegis Graham Bell Award, Innovation in Gen AI</h3>
+        <p class="timeline-role">VFS Global’s IDP platform (founding engineer)</p>
+      </div>
+    </article>
+
+    <article class="timeline-entry">
+      <div class="timeline-date">2023</div>
+      <div class="timeline-content">
+        <h3 class="timeline-title">Smart India Hackathon (national)</h3>
+        <p class="timeline-role">Top 6 in problem statement, AI for sustainability</p>
+      </div>
+    </article>
+
+    <article class="timeline-entry">
+      <div class="timeline-date">2022 – 2023</div>
+      <div class="timeline-content">
+        <h3 class="timeline-title">Winner, JIIT hackathons</h3>
+        <p class="timeline-role">Hacking Summer 2022, Hacking Winter 2022, Hacking Summer 2023 (SIH qualifier)</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="cv-section">
+    <h2 class="section-label">Service &amp; Mentoring</h2>
+
+    <article class="timeline-entry">
+      <div class="timeline-date">2026</div>
+      <div class="timeline-content">
+        <h3 class="timeline-title">Reviewer</h3>
+        <p class="timeline-role">COLM 2026, UAI 2026 · Workshops: ICML 2026 FAGEN, COLM 2026 AIW</p>
+      </div>
+    </article>
+
+    <article class="timeline-entry">
+      <div class="timeline-date">2026</div>
+      <div class="timeline-content">
+        <h3 class="timeline-title">Volunteer</h3>
+        <p class="timeline-role">ICML 2026</p>
+      </div>
+    </article>
+
+    <article class="timeline-entry">
+      <div class="timeline-date">2026</div>
+      <div class="timeline-content">
+        <h3 class="timeline-title">Mentoring</h3>
+        <ul class="timeline-points">
+          <li>Guided two undergraduates through their first independent research papers, both accepted at NeurIPS 2026 workshops.</li>
+        </ul>
+      </div>
     </article>
   </div>
 </div>
